@@ -32,6 +32,10 @@
           "named": true
         },
         {
+          "type": "text",
+          "named": true
+        },
+        {
           "type": "user",
           "named": true
         }
@@ -40,7 +44,7 @@
   },
   {
     "type": "text",
-    "named": false,
+    "named": true,
     "fields": {}
   },
   {

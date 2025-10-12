@@ -22,19 +22,23 @@ DEBUG: thís shoúld wórk with $weird$ symbols
 
 (source
   (tag
-    (name))
+    (name)
+    (text))
   (tag
-    (name))
+    (name)
+    (text))
   (tag
-    (name))
+    (name)
+    (text))
   (tag
-    (name))
+    (name)
+    (text))
   (tag
-    (name))
+    (name)
+    (text))
   (tag
-    (name))
-  (tag
-    (name)))
+    (name)
+    (text)))
 
 ================================================================================
 Decorated tags
@@ -61,22 +65,24 @@ FIXME(): This isn't a valid tag (user is missing)
 (source
   (tag
     (name)
-    (user))
+    (user)
+    (text))
   (tag
     (name)
-    (user))
+    (user)
+    (text))
   (tag
     (name)
-    (user))
+    (user)
+    (text))
   (tag
     (name)
-    (user))
+    (user)
+    (text))
   (tag
     (name)
-    (user))
-  (tag
-    (name)
-    (user)))
+    (user)
+    (text)))
 
 ================================================================================
 URIS
@@ -130,8 +136,8 @@ Follow me in https://github.com, https://x.com, https://linkedin.com...
   (uri)
   (tag
     (name)
-    (user))
-  (uri)
+    (user)
+    (text))
   (uri)
   (uri)
   (uri)

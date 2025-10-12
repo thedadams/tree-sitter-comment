@@ -49,6 +49,18 @@
         {
           "type": "STRING",
           "value": ":"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "text"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         }
       ]
     },
@@ -71,6 +83,67 @@
         {
           "type": "STRING",
           "value": ")"
+        }
+      ]
+    },
+    "text": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "TOKEN",
+          "content": {
+            "type": "PATTERN",
+            "value": "\\s+[^h\\n\\r][^\\n\\r]*"
+          }
+        },
+        {
+          "type": "TOKEN",
+          "content": {
+            "type": "PATTERN",
+            "value": "\\s+h[^t\\n\\r][^\\n\\r]*"
+          }
+        },
+        {
+          "type": "TOKEN",
+          "content": {
+            "type": "PATTERN",
+            "value": "\\s+ht[^t\\n\\r][^\\n\\r]*"
+          }
+        },
+        {
+          "type": "TOKEN",
+          "content": {
+            "type": "PATTERN",
+            "value": "\\s+htt[^p\\n\\r][^\\n\\r]*"
+          }
+        },
+        {
+          "type": "TOKEN",
+          "content": {
+            "type": "PATTERN",
+            "value": "\\s+http[^s:\\n\\r][^\\n\\r]*"
+          }
+        },
+        {
+          "type": "TOKEN",
+          "content": {
+            "type": "PATTERN",
+            "value": "\\s+https[^:\\n\\r][^\\n\\r]*"
+          }
+        },
+        {
+          "type": "TOKEN",
+          "content": {
+            "type": "PATTERN",
+            "value": "\\s+https?:[^\\/\\n\\r][^\\n\\r]*"
+          }
+        },
+        {
+          "type": "TOKEN",
+          "content": {
+            "type": "PATTERN",
+            "value": "\\s+https?:\\/[^\\/\\n\\r][^\\n\\r]*"
+          }
         }
       ]
     },
