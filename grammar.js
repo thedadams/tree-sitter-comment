@@ -79,14 +79,14 @@ module.exports = grammar({
     ),
 
     text: ($) => choice(
-      token(/\s+[^h\n\r][^\n\r]*/),
-      token(/\s+h[^t\n\r][^\n\r]*/),
-      token(/\s+ht[^t\n\r][^\n\r]*/),
-      token(/\s+htt[^p\n\r][^\n\r]*/),
-      token(/\s+http[^s:\n\r][^\n\r]*/),
-      token(/\s+https[^:\n\r][^\n\r]*/),
-      token(/\s+https?:[^\/\n\r][^\n\r]*/),
-      token(/\s+https?:\/[^\/\n\r][^\n\r]*/)
+      token(/[ \t]+[^h\n\r][^\n\r]*/),
+      token(/[ \t]+h[^t\n\r][^\n\r]*/),
+      token(/[ \t]+ht[^t\n\r][^\n\r]*/),
+      token(/[ \t]+htt[^p\n\r][^\n\r]*/),
+      token(/[ \t]+http[^s:\n\r][^\n\r]*/),
+      token(/[ \t]+https[^:\n\r][^\n\r]*/),
+      token(/[ \t]+https?:[^\/\n\r][^\n\r]*/),
+      token(/[ \t]+https?:\/[^\/\n\r][^\n\r]*/)
     ),
 
     // This token is split into two parts so the end character isn't included in the URI itself.

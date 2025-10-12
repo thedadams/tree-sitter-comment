@@ -34,6 +34,8 @@ DEBUG: thís shoúld wórk with $weird$ symbols
     (name)
     (text))
   (tag
+    (name))
+  (tag
     (name)
     (text))
   (tag
@@ -79,6 +81,9 @@ FIXME(): This isn't a valid tag (user is missing)
     (name)
     (user)
     (text))
+  (tag
+    (name)
+    (user))
   (tag
     (name)
     (user)
