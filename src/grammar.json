@@ -87,65 +87,11 @@
       ]
     },
     "text": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "TOKEN",
-          "content": {
-            "type": "PATTERN",
-            "value": "[ \\t]+[^h\\n\\r][^\\n\\r]*"
-          }
-        },
-        {
-          "type": "TOKEN",
-          "content": {
-            "type": "PATTERN",
-            "value": "[ \\t]+h[^t\\n\\r][^\\n\\r]*"
-          }
-        },
-        {
-          "type": "TOKEN",
-          "content": {
-            "type": "PATTERN",
-            "value": "[ \\t]+ht[^t\\n\\r][^\\n\\r]*"
-          }
-        },
-        {
-          "type": "TOKEN",
-          "content": {
-            "type": "PATTERN",
-            "value": "[ \\t]+htt[^p\\n\\r][^\\n\\r]*"
-          }
-        },
-        {
-          "type": "TOKEN",
-          "content": {
-            "type": "PATTERN",
-            "value": "[ \\t]+http[^s:\\n\\r][^\\n\\r]*"
-          }
-        },
-        {
-          "type": "TOKEN",
-          "content": {
-            "type": "PATTERN",
-            "value": "[ \\t]+https[^:\\n\\r][^\\n\\r]*"
-          }
-        },
-        {
-          "type": "TOKEN",
-          "content": {
-            "type": "PATTERN",
-            "value": "[ \\t]+https?:[^\\/\\n\\r][^\\n\\r]*"
-          }
-        },
-        {
-          "type": "TOKEN",
-          "content": {
-            "type": "PATTERN",
-            "value": "[ \\t]+https?:\\/[^\\/\\n\\r][^\\n\\r]*"
-          }
-        }
-      ]
+      "type": "TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "[ \\t]+([^h\\n\\r]|h([^t\\n\\r]|t([^t\\n\\r]|t([^p\\n\\r]|p([^s:\\n\\r]|s[^:\\n\\r]|:[^\\/\\n\\r]|:\\/[^\\/\\n\\r])))))[^\\n\\r]*"
+      }
     },
     "_full_uri": {
       "type": "SEQ",

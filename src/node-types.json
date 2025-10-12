@@ -44,7 +44,7 @@
   },
   {
     "type": "text",
-    "named": true,
+    "named": false,
     "fields": {}
   },
   {
