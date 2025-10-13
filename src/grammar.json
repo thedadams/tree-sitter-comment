@@ -54,6 +54,18 @@
           "type": "CHOICE",
           "members": [
             {
+              "type": "PATTERN",
+              "value": "[ \\t]+"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
               "type": "SYMBOL",
               "name": "text"
             },
@@ -87,11 +99,46 @@
       ]
     },
     "text": {
-      "type": "TOKEN",
-      "content": {
-        "type": "PATTERN",
-        "value": "[ \\t]+([^h\\n\\r]|h([^t\\n\\r]|t([^t\\n\\r]|t([^p\\n\\r]|p([^s:\\n\\r]|s[^:\\n\\r]|:[^\\/\\n\\r]|:\\/[^\\/\\n\\r])))))[^\\n\\r]*"
-      }
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "_text_or_uri"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "PATTERN",
+                "value": "[ \\t]+"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "_text_or_uri"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "_text_or_uri": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "uri"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_text_word"
+        }
+      ]
+    },
+    "_text_word": {
+      "type": "PATTERN",
+      "value": "([^h \\t\\n\\r]|h([^t \\t\\n\\r]|t([^t \\t\\n\\r]|t([^p \\t\\n\\r]|p([^s: \\t\\n\\r]|s[^: \\t\\n\\r]|:[^\\/ \\t\\n\\r]|:\\/[^\\/ \\t\\n\\r])))))+"
     },
     "_full_uri": {
       "type": "SEQ",

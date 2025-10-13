@@ -44,8 +44,18 @@
   },
   {
     "type": "text",
-    "named": false,
-    "fields": {}
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "uri",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "!",
