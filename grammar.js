@@ -69,7 +69,6 @@ module.exports = grammar({
       $.name,
       optional($._user),
       ":",
-      optional(/[ \t]+/),
       optional($.text),
     ),
 
@@ -79,17 +78,7 @@ module.exports = grammar({
       ")",
     ),
 
-    text: ($) => seq(
-      $._text_or_uri,
-      repeat(seq(/[ \t]+/, $._text_or_uri)),
-    ),
-
-    _text_or_uri: ($) => choice(
-      $.uri,
-      $._text_word,
-    ),
-
-    _text_word: ($) => /([^h \t\n\r]|h([^t \t\n\r]|t([^t \t\n\r]|t([^p \t\n\r]|p([^s: \t\n\r]|s[^: \t\n\r]|:[^\/ \t\n\r]|:\/[^\/ \t\n\r])))))+/,
+    text: ($) => token(/[ \t]+([^h\n\r]|h([^t\n\r]|t([^t\n\r]|t([^p\n\r]|p([^s:\n\r]|s[^:\n\r]|:[^\/\n\r]|:\/[^\/\n\r])))))[^\n\r]*/),
 
     // This token is split into two parts so the end character isn't included in the URI itself.
     _full_uri: ($) => seq($.uri, choice(alias($._end_char, "text"), /\s/)),
