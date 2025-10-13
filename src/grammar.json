@@ -12,10 +12,6 @@
             "name": "tag"
           },
           {
-            "type": "SYMBOL",
-            "name": "_full_uri"
-          },
-          {
             "type": "ALIAS",
             "content": {
               "type": "SYMBOL",
@@ -90,39 +86,8 @@
       "type": "TOKEN",
       "content": {
         "type": "PATTERN",
-        "value": "[ \\t]+([^h\\n\\r]|h([^t\\n\\r]|t([^t\\n\\r]|t([^p\\n\\r]|p([^s:\\n\\r]|s[^:\\n\\r]|:[^\\/\\n\\r]|:\\/[^\\/\\n\\r])))))[^\\n\\r]*"
+        "value": "[ \\t]+[^A-Z\\n\\r][^\\n\\r]*"
       }
-    },
-    "_full_uri": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "uri"
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "SYMBOL",
-                "name": "_end_char"
-              },
-              "named": false,
-              "value": "text"
-            },
-            {
-              "type": "PATTERN",
-              "value": "\\s"
-            }
-          ]
-        }
-      ]
-    },
-    "uri": {
-      "type": "PATTERN",
-      "value": "https?:\\/\\/([^\\s\\.,:;!\\?\\\\'\"`\\}\\]\\)>]|[\\.,:;!\\?\\\\'\"`\\}\\]\\)>][^\\s\\.,:;!\\?\\\\'\"`\\}\\]\\)>])+"
     },
     "_text": {
       "type": "CHOICE",
@@ -219,67 +184,6 @@
         {
           "type": "STRING",
           "value": "-"
-        }
-      ]
-    },
-    "_end_char": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "."
-        },
-        {
-          "type": "STRING",
-          "value": ","
-        },
-        {
-          "type": "STRING",
-          "value": ":"
-        },
-        {
-          "type": "STRING",
-          "value": ";"
-        },
-        {
-          "type": "STRING",
-          "value": "!"
-        },
-        {
-          "type": "STRING",
-          "value": "?"
-        },
-        {
-          "type": "STRING",
-          "value": "\\"
-        },
-        {
-          "type": "STRING",
-          "value": "'"
-        },
-        {
-          "type": "STRING",
-          "value": "\""
-        },
-        {
-          "type": "STRING",
-          "value": "`"
-        },
-        {
-          "type": "STRING",
-          "value": "}"
-        },
-        {
-          "type": "STRING",
-          "value": "]"
-        },
-        {
-          "type": "STRING",
-          "value": ")"
-        },
-        {
-          "type": "STRING",
-          "value": ">"
         }
       ]
     }
