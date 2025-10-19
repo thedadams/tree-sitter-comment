@@ -1,6 +1,6 @@
 /**
  * @file Grammar for code tags like TODO:, FIXME(user): for the tree-sitter parsing library
- * @author Santos Gallegos <stsewd@proton.me>
+ * @author Donnie Adams <thedadams@proton.me>
  * @license MIT
  */
 
@@ -51,31 +51,14 @@ const STOP_CHARS = [
 module.exports = grammar({
   name: "comment",
 
-  externals: ($) => [
-    $.name,
-    $.invalid_token
-  ],
+  externals: ($) => [$.name, $.invalid_token],
 
   rules: {
-    source: ($) => repeat(
-      choice(
-        $.tag,
-        $._full_uri,
-        alias($._text, "text"),
-      ),
-    ),
+    source: ($) => repeat(choice($.tag, $._full_uri, alias($._text, "text"))),
 
-    tag: ($) => seq(
-      $.name,
-      optional($._user),
-      ":",
-    ),
+    tag: ($) => seq($.name, optional($._user), ":"),
 
-    _user: ($) => seq(
-      "(",
-      alias(/[^()]+/, $.user),
-      ")",
-    ),
+    _user: ($) => seq("(", alias(/[^()]+/, $.user), ")"),
 
     // This token is split into two parts so the end character isn't included in the URI itself.
     _full_uri: ($) => seq($.uri, choice(alias($._end_char, "text"), /\s/)),

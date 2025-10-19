@@ -2,12 +2,12 @@
 name = "tree-sitter-comment"
 description = "Grammar for code tags like TODO:, FIXME(user): for the tree-sitter parsing library"
 version = "0.3.0"
-authors = ["Santos Gallegos <stsewd@proton.me>"]
+authors = ["Donnie Adams <thedadams@thedadams.com>"]
 license = "MIT"
 readme = "README.md"
 keywords = ["incremental", "parsing", "tree-sitter", "comment"]
 categories = ["parser-implementations", "parsing", "text-editors"]
-repository = "https://github.com/stsewd/tree-sitter-comment"
+repository = "https://github.com/thedadams/tree-sitter-comment"
 edition = "2021"
 autoexamples = false
 
