@@ -2,9 +2,13 @@ name: CI
 
 on:
   push:
-    branches: [ master ]
+    branches:
+      - main
+      - zed
   pull_request:
-    branches: [ master ]
+    branches:
+      - main
+      - zed
 
 jobs:
   build:
@@ -14,7 +18,7 @@ jobs:
       - name: Set up tree-sitter
         uses: tree-sitter/setup-action/cli@v2
       - name: Run tests
-        uses: tree-sitter/parser-test-action@v2
+        uses: tree-sitter/parser-test-action@v3
         with:
           test-rust: true
           test-node: false
@@ -28,7 +32,7 @@ jobs:
       - name: Set up tree-sitter
         uses: tree-sitter/setup-action/cli@v2
       - name: Run tests
-        uses: tree-sitter/parser-test-action@v2
+        uses: tree-sitter/parser-test-action@v3
         with:
           test-rust: true
           test-node: false
@@ -42,7 +46,7 @@ jobs:
       - name: Set up tree-sitter
         uses: tree-sitter/setup-action/cli@v2
       - name: Run tests
-        uses: tree-sitter/parser-test-action@v2
+        uses: tree-sitter/parser-test-action@v3
         with:
           test-rust: true
           test-node: false

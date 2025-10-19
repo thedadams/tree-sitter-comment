@@ -1,11 +1,9 @@
 # tree-sitter-comment
 
-[![CI](https://github.com/stsewd/tree-sitter-comment/workflows/CI/badge.svg)](https://github.com/stsewd/tree-sitter-comment/actions?query=workflow%3ACI+branch%3Amaster)
+[![CI](https://github.com/thedadams/tree-sitter-comment/workflows/CI/badge.svg)](https://github.com/thedadams/tree-sitter-comment/actions?query=workflow%3ACI+branch%3Azed)
 
 [Tree-sitter](https://github.com/tree-sitter/tree-sitter) grammar for comment tags like `TODO:`, `FIXME(user):`, etc.
 Useful to be embedded inside comments.
-
-Check the playground at <https://stsewd.dev/tree-sitter-comment/>.
 
 ## Syntax
 
@@ -32,18 +30,18 @@ feel free to open a issue.
 
 ```
 TODO: something needs to be done
-TODO(stsewd): something needs to be done by @stsewd
+TODO(thedadams): something needs to be done by @thedadams
 
 XXX: fix something else.
 XXX:    extra white spaces.
 
 (NOTE: this works too).
 
-NOTE-BUG (stsewd): tags can be separated by `-`
+NOTE-BUG (thedadams): tags can be separated by `-`
 NOTE_BUG: or by `_`.
 
 This will be recognized as a URI
-https://github.com/stsewd/
+https://github.com/thedadams/
 ```
 
 ## FAQ
@@ -73,15 +71,6 @@ but you can match it with this query:
  (#match? @issue "^[0-9]+$"))
 ```
 
-### I'm using Neovim and don't see all tags highlighted
-
-To avoid false positives, Neovim doesn't highlight all tags,
-but a list of specific ones,
-see the list at [`queries/comment/highlights.scm`](https://github.com/nvim-treesitter/nvim-treesitter/blob/master/queries/comment/highlights.scm).
-
-If you want your tag highlighted, you can extend the query locally, see `:h treesitter-query`.
-Or if you think it's very common, you can suggest it [upstream](https://github.com/nvim-treesitter/nvim-treesitter).
-
 ## Why C?
 
 Tree-sitter is a [LR parser](https://en.wikipedia.org/wiki/LR_parser) for context-free grammars,
@@ -92,11 +81,12 @@ it requires some manual parsing in C.
 
 ## Projects using this grammar
 
-- [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)
-- [helix](https://github.com/helix-editor/helix)
 - [zed-comment](https://github.com/thedadams/zed-comment)
-- Yours?
+
+## Credits
+
+This grammar is a fork of [Santos Gallegos' tree-sitter-comment](https://github.com/stsewd/tree-sitter-comment). I have made some changes specific to how I want this grammar to work in Zed, but the credit for this grammar goes to Santos Gallegos. If you like this grammar, please consider [buysing Santos a coffee](https://www.buymeacoffee.com/stsewd).
 
 ## Other grammars
 
-- [tree-sitter-rst](https://github.com/stsewd/tree-sitter-rst): reStructuredText grammar.
+- [tree-sitter-rst](https://github.com/thedadams/tree-sitter-rst): reStructuredText grammar.

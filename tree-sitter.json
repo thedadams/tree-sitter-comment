@@ -6,9 +6,7 @@
       "camelcase": "Comment",
       "title": "Comment",
       "scope": "source.comment",
-      "file-types": [
-        "comment"
-      ],
+      "file-types": ["comment"],
       "injection-regex": "^comment$",
       "class-name": "TreeSitterComment"
     }
@@ -19,14 +17,14 @@
     "description": "Grammar for code tags like TODO:, FIXME(user): for the tree-sitter parsing library",
     "authors": [
       {
-        "name": "Santos Gallegos",
-        "email": "stsewd@proton.me",
-        "url": "https://stsewd.dev/"
+        "name": "Donnie Adams",
+        "email": "thedadams@thedadams.com",
+        "url": "https://thedadams.dev/"
       }
     ],
     "links": {
-      "repository": "https://github.com/stsewd/tree-sitter-comment",
-      "funding": "https://github.com/sponsors/stsewd"
+      "repository": "https://github.com/thedadams/tree-sitter-comment",
+      "funding": "https://github.com/sponsors/thedadams"
     }
   },
   "bindings": {

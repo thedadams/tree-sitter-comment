@@ -10,9 +10,9 @@
 /// They can be of the form:
 /// - TODO:
 /// - TODO: text
-/// - TODO(stsewd):
-/// - TODO(stsewd): text
-/// - TODO (stsewd): text
+/// - TODO(thedadams):
+/// - TODO(thedadams): text
+/// - TODO (thedadams): text
 static bool parse_tagname(TSLexer* lexer, const bool* valid_symbols)
 {
   if (!is_upper(lexer->lookahead) || !valid_symbols[T_TAGNAME]) {

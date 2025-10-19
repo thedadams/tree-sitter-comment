@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.13)
 project(tree-sitter-comment
         VERSION "0.3.0"
         DESCRIPTION "Grammar for code tags like TODO:, FIXME(user): for the tree-sitter parsing library"
-        HOMEPAGE_URL "https://github.com/stsewd/tree-sitter-comment"
+        HOMEPAGE_URL "https://github.com/thedadams/tree-sitter-comment"
         LANGUAGES C)
 
 option(BUILD_SHARED_LIBS "Build using shared libraries" ON)

@@ -3,7 +3,7 @@ $(error Windows is not supported)
 endif
 
 LANGUAGE_NAME := tree-sitter-comment
-HOMEPAGE_URL := https://github.com/stsewd/tree-sitter-comment
+HOMEPAGE_URL := https://github.com/thedadams/tree-sitter-comment
 VERSION := 0.3.0
 
 # repository

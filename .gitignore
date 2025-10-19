@@ -41,6 +41,7 @@ zig-out/
 
 # Grammar volatiles
 *.wasm
+!tree-sitter-comment.wasm
 *.obj
 *.o
 
@@ -48,3 +49,6 @@ zig-out/
 *.tar.gz
 *.tgz
 *.zip
+
+# Agent configuration
+.claude/
