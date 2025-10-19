@@ -32,6 +32,10 @@
           "named": true
         },
         {
+          "type": "text",
+          "named": true
+        },
+        {
           "type": "user",
           "named": true
         }

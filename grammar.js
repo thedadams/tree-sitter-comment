@@ -56,9 +56,11 @@ module.exports = grammar({
   rules: {
     source: ($) => repeat(choice($.tag, $._full_uri, alias($._text, "text"))),
 
-    tag: ($) => seq($.name, optional($._user), ":"),
+    tag: ($) => seq($.name, optional($._user), ":", optional($.text)),
 
     _user: ($) => seq("(", alias(/[^()]+/, $.user), ")"),
+
+    text: ($) => token(/[ \t]+[^\n\r]+/),
 
     // This token is split into two parts so the end character isn't included in the URI itself.
     _full_uri: ($) => seq($.uri, choice(alias($._end_char, "text"), /\s/)),
