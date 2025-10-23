@@ -1,7 +1,8 @@
-#include "parser.h"
-
 #include "chars.c"
+
+#include "parser.h"
 #include "tokens.h"
+#include "tree_sitter_comment/chars.h"
 #include <stdbool.h>
 #include <stdio.h>
 
@@ -15,7 +16,15 @@
 /// - TODO (thedadams): text
 static bool parse_tagname(TSLexer* lexer, const bool* valid_symbols)
 {
-  if (!is_upper(lexer->lookahead) || !valid_symbols[T_TAGNAME]) {
+  if (!valid_symbols[T_TAGNAME] && !is_upper(lexer->lookahead) && !is_possible_start_of_tag(lexer->lookahead)) {
+    return false;
+  }
+
+  while (!is_newline(lexer->lookahead) && (is_possible_start_of_tag(lexer->lookahead) || is_space(lexer->lookahead))) {
+    lexer->advance(lexer, false);
+  }
+
+  if (!is_upper(lexer->lookahead)) {
     return false;
   }
 
@@ -89,7 +98,7 @@ static bool parse(TSLexer* lexer, const bool* valid_symbols)
     return false;
   }
 
-  if (is_upper(lexer->lookahead) && valid_symbols[T_TAGNAME]) {
+  if (valid_symbols[T_TAGNAME] && (is_upper(lexer->lookahead) || is_possible_start_of_tag(lexer->lookahead))) {
     return parse_tagname(lexer, valid_symbols);
   }
 

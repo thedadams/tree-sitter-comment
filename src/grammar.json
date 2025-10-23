@@ -87,10 +87,10 @@
       ]
     },
     "text": {
-      "type": "TOKEN",
+      "type": "IMMEDIATE_TOKEN",
       "content": {
         "type": "PATTERN",
-        "value": "[ \\t]+[^\\n\\r]+"
+        "value": "[ \\t]+([^\\n\\r]|\\r?\\n[^a-zA-Z0-9\\n\\r]*[a-zA-Z0-9][^\\n\\r]*)+"
       }
     },
     "_full_uri": {

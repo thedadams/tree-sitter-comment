@@ -13,6 +13,7 @@
 #define CHAR_TAB '\t'
 #define CHAR_VERTICAL_TAB '\v'
 
+static bool is_possible_start_of_tag(int32_t c);
 static bool is_internal_char(int32_t c);
 static bool is_newline(int32_t c);
 static bool is_space(int32_t c);

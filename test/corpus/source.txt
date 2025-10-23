@@ -153,3 +153,142 @@ Follow me in https://github.com, https://x.com, https://linkedin.com...
   (uri)
   (uri)
   (uri))
+
+================================================================================
+Multi-line text
+================================================================================
+
+TODO: This is a task
+that spans multiple lines
+and continues here
+
+FIXME: Another tag after blank line
+
+TODO(user): Multi-line with user
+also spans lines
+
+BUG: This spans
+multiple lines with special chars: @#$%
+and continues...
+
+HACK: Single blank line below acts as separator
+
+TODO: New section
+with more text
+across lines
+TODO: another line
+
+--------------------------------------------------------------------------------
+
+(source
+  (tag
+    (name)
+    (text))
+  (tag
+    (name)
+    (text))
+  (tag
+    (name)
+    (user)
+    (text))
+  (tag
+    (name)
+    (text))
+  (tag
+    (name)
+    (text))
+  (tag
+    (name)
+    (text)))
+
+================================================================================
+Non-alphanumeric lines break capture
+================================================================================
+
+TODO: This is a line
+This spans multi-line
+* /
+WARN: This is now a new group.
+
+NOTE: First item
+- has alphanumeric
+---
+BUG: Symbols only line breaks it
+
+FIXME: Another example
+continues here
+*/
+TODO: New section
+-
+DOPE:
+
+--------------------------------------------------------------------------------
+
+(source
+  (tag
+    (name)
+    (text))
+  (tag
+    (name)
+    (text))
+  (tag
+    (name)
+    (text))
+  (tag
+    (name)
+    (text))
+  (tag
+    (name)
+    (text))
+  (tag
+    (name)
+    (text))
+  (tag
+    (name)))
+
+================================================================================
+Comment-type characters to start line
+================================================================================
+
+* TODO: This is a line
+This spans multi-line
+* /
+WARN: This is now a new group.
+
+*
+
+NOTE: First item
+- has alphanumeric
+---
+*BUG: Symbols only line breaks it
+
+#FIXME: Another example
+continues here
+*/
+TODO: New section
+-
+DOPE:
+
+--------------------------------------------------------------------------------
+
+(source
+  (tag
+    (name)
+    (text))
+  (tag
+    (name)
+    (text))
+  (tag
+    (name)
+    (text))
+  (tag
+    (name)
+    (text))
+  (tag
+    (name)
+    (text))
+  (tag
+    (name)
+    (text))
+  (tag
+    (name)))
