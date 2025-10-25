@@ -12,6 +12,10 @@
             "name": "tag"
           },
           {
+            "type": "SYMBOL",
+            "name": "code_block"
+          },
+          {
             "type": "ALIAS",
             "content": {
               "type": "SYMBOL",
@@ -85,6 +89,63 @@
     "_newline": {
       "type": "PATTERN",
       "value": "\\r?\\n"
+    },
+    "code_block": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "_code_block_start"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "IMMEDIATE_TOKEN",
+                "content": {
+                  "type": "PATTERN",
+                  "value": "[^\\r\\n]+"
+                }
+              },
+              "named": true,
+              "value": "language"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "IMMEDIATE_TOKEN",
+          "content": {
+            "type": "PATTERN",
+            "value": "\\r?\\n"
+          }
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "PATTERN",
+                "value": "([^\\n`]|`[^`\\n]|``[^`\\n]|\\n)+"
+              },
+              "named": true,
+              "value": "code_block_content"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_code_block_end"
+        }
+      ]
     },
     "_text": {
       "type": "CHOICE",
@@ -205,6 +266,14 @@
     {
       "type": "SYMBOL",
       "name": "text"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_code_block_start"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_code_block_end"
     },
     {
       "type": "SYMBOL",

@@ -12,6 +12,7 @@
 #define CHAR_FORM_FEED '\f'
 #define CHAR_TAB '\t'
 #define CHAR_VERTICAL_TAB '\v'
+#define CHAR_BACK_TICK '`'
 
 static bool is_possible_start_of_tag(int32_t c);
 static bool is_internal_char(int32_t c);
@@ -19,6 +20,9 @@ static bool is_eof(int32_t c);
 static bool is_newline(int32_t c);
 static bool is_space(int32_t c);
 static bool is_upper(int32_t c);
+static bool is_lower(int32_t c);
+static bool is_alpha(int32_t c);
+static bool is_alpha_numeric(int32_t c);
 static bool is_digit(int32_t c);
 
 #endif /* ifndef TREE_SITTER_COMMENT_CHARS_H */

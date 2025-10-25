@@ -224,7 +224,7 @@ DOPE:
  * Not parsed because of beginning
  *
  * NOTE: This is a note that starts with a space
- * FIX:ME: This is still part of the NOTE
+ * FIXME: This is still part of the NOTE
 
 --------------------------------------------------------------------------------
 
@@ -255,3 +255,80 @@ DOPE:
   (tag
     (name)
     (text)))
+
+================================================================================
+Comments with code blocks
+================================================================================
+
+TODO: This is a line
+
+```python
+print("Hello, World!")
+```
+
+```
+echo "Without a language does not parse"
+```
+
+Doesn't parse
+```
+```
+
+Doesn't parse
+```
+
+```
+
+Does parse
+```bash
+```
+
+Does parse
+```bash
+
+```
+
+WARN(thedadams): warning
+
+```
+WARN(thedadams): doesn't parse as a code block, but does parse as a tag
+```
+
+````bash
+echo "extra back tick to start still parses"
+```
+
+```bash
+echo "extra back tick to end still parses"
+````
+
+a```bash
+echo "letter before backtick shouldn't parse"
+
+--------------------------------------------------------------------------------
+
+(source
+  (tag
+    (name)
+    (text))
+  (code_block
+    (language)
+    (code_block_content))
+  (code_block
+    (language))
+  (code_block
+    (language))
+  (tag
+    (name)
+    (user)
+    (text))
+  (tag
+    (name)
+    (user)
+    (text))
+  (code_block
+    (language)
+    (code_block_content))
+  (code_block
+    (language)
+    (code_block_content)))

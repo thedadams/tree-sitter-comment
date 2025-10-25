@@ -1,7 +1,6 @@
 #include <tree_sitter/parser.h>
 
 #include "tree_sitter_comment/parser.c"
-#include "tree_sitter_comment/tokens.h"
 
 void* tree_sitter_comment_external_scanner_create()
 {

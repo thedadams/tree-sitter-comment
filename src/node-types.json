@@ -1,5 +1,24 @@
 [
   {
+    "type": "code_block",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "code_block_content",
+          "named": true
+        },
+        {
+          "type": "language",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "source",
     "named": true,
     "root": true,
@@ -8,6 +27,10 @@
       "multiple": true,
       "required": false,
       "types": [
+        {
+          "type": "code_block",
+          "named": true
+        },
         {
           "type": "tag",
           "named": true
@@ -114,6 +137,14 @@
   {
     "type": "`",
     "named": false
+  },
+  {
+    "type": "code_block_content",
+    "named": true
+  },
+  {
+    "type": "language",
+    "named": true
   },
   {
     "type": "name",

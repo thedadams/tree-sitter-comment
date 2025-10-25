@@ -4,6 +4,8 @@
 enum TokenType {
   T_TAGNAME,
   T_TAGTEXT,
+  T_CODE_BLOCK_START,
+  T_CODE_BLOCK_END,
   T_INVALID_TOKEN,
 };
 

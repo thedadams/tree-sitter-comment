@@ -34,12 +34,19 @@ const STOP_CHARS = [
 module.exports = grammar({
   name: "comment",
 
-  externals: ($) => [$.name, $.text, $.invalid_token],
+  externals: ($) => [
+    $.name,
+	$.text,
+    $._code_block_start,
+    $._code_block_end,
+    $.invalid_token,
+  ],
 
   extras: ($) => [$._newline, /\s/],
 
   rules: {
-    source: ($) => repeat(choice($.tag, alias($._text, "text"))),
+    source: ($) =>
+      repeat(choice($.tag, $.code_block, alias($._text, "text"))),
 
     tag: ($) => seq($.name, optional($._user), ":", optional($.text)),
 
@@ -47,6 +54,15 @@ module.exports = grammar({
 
     // HACK: for some reason this needs be assigned to a token, otherwise isn't recognized as an extra.
     _newline: ($) => /\r?\n/,
+
+    code_block: ($) =>
+      seq(
+        $._code_block_start,
+        optional(alias(token.immediate(/[^\r\n]+/), $.language)),
+        token.immediate(/\r?\n/),
+        optional(alias(/([^\n`]|`[^`\n]|``[^`\n]|\n)+/, $.code_block_content)),
+        $._code_block_end,
+      ),
 
     // Text tokens can be a single character, or a sequence of characters that aren't stop characters.
     _text: ($) => choice($._stop_char, notmatching(STOP_CHARS)),
