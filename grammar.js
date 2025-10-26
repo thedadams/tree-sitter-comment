@@ -60,7 +60,10 @@ module.exports = grammar({
 
     _user: ($) => seq("(", alias(/[^()]+/, $.user), ")"),
 
-    text: ($) => token.immediate(/[ \t]+([^\n\r]|\r?\n[^a-zA-Z0-9\n\r]*[a-zA-Z0-9][^\n\r]*)+/),
+    text: ($) =>
+      token.immediate(
+        /[ \t]+([^\n\r]|\r?\n[^a-zA-Z0-9\n\r]*[a-zA-Z0-9][^\n\r]*)+/,
+      ),
 
     // This token is split into two parts so the end character isn't included in the URI itself.
     _full_uri: ($) => seq($.uri, choice(alias($._end_char, "text"), /\s/)),
