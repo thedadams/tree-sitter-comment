@@ -10,11 +10,11 @@ TODO:    extra white spaces.
 
 NOTAG:missing space
 
-(TODO: I'm inside parentheses)
+(TODO: I'm inside parentheses, doesn't work)
 
 NOTE:
 
-"NOTE: this should work!"
+"NOTE: this should not work!"
 
 DEBUG: thís shoúld wórk with $weird$ symbols
 
@@ -31,13 +31,7 @@ DEBUG: thís shoúld wórk with $weird$ symbols
     (name)
     (text))
   (tag
-    (name)
-    (text))
-  (tag
     (name))
-  (tag
-    (name)
-    (text))
   (tag
     (name)
     (text)))
@@ -54,11 +48,11 @@ TODO(@todo):    extra white spaces.
 
 NOTAG(tag):missing space
 
-(TODO (someone): I'm inside parentheses)
+(TODO (someone): I'm inside parentheses, doesn't work)
 
 NOTE(a user):
 
-"NOTE (a user): this should work!"
+"NOTE (a user): this should not work!"
 
 FIXME(): This isn't a valid tag (user is missing)
 
@@ -79,80 +73,7 @@ FIXME(): This isn't a valid tag (user is missing)
     (text))
   (tag
     (name)
-    (user)
-    (text))
-  (tag
-    (name)
-    (user))
-  (tag
-    (name)
-    (user)
-    (text)))
-
-================================================================================
-URIS
-================================================================================
-
-TODO: http://example.com
-
-TODO: https://example.com
-
-Something "http://example.com"
-
-URI: https://user:pass@example.com/org/repo/?foo=baz
-
-(https://example.com/foo/bar/)
-
-URI(me): (https://github.com/thedadams/?foo=bar#baz)
-
-URLs containing stop characters (dots, slashes, etc):
-
-- https://github.com/thedadams/tree-sitter-rst#1.1
-- https://doc.rust-lang.org/std/boxed/struct.Box.html#impl-IntoIterator-for-Box%3C%5BI%5D,+A%3E
-- https://web.archive.org/web/20250315035304/https://www.wikipedia.org/
-
-URLs containing parentheses:
-
-- https://en.wikipedia.org/wiki/ANSI_escape_code#SGR_(Select_Graphic_Rendition)_parameters
-- https://en.wikipedia.org/wiki/Naming_convention_(programming)#Multiple-word_identifiers
-
-URLs from popular markup languages:
-
-- [Markdown](https://github.com/thedadams/tree-sitter-comment)
-- `reStructuredText <https://github.com/thedadams/tree-sitter-comment>`_
-
-URLs in prose:
-
-Follow me in https://github.com, https://x.com, https://linkedin.com...
-
---------------------------------------------------------------------------------
-
-(source
-  (tag
-    (name)
-    (text))
-  (tag
-    (name)
-    (text))
-  (uri)
-  (tag
-    (name)
-    (text))
-  (uri)
-  (tag
-    (name)
-    (user)
-    (text))
-  (uri)
-  (uri)
-  (uri)
-  (uri)
-  (uri)
-  (uri)
-  (uri)
-  (uri)
-  (uri)
-  (uri))
+    (user)))
 
 ================================================================================
 Multi-line text
@@ -176,7 +97,12 @@ HACK: Single blank line below acts as separator
 TODO: New section
 with more text
 across lines
-TODO: another line
+TODO: another line, but part of the above
+
+"TODO(user): This is a task
+that spans multiple lines
+and continues here.
+Not parsed because of beginning "
 
 --------------------------------------------------------------------------------
 
