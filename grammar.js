@@ -7,23 +7,6 @@
 /// <reference types="tree-sitter-cli/dsl" />
 // @ts-check
 
-const END_CHARS = [
-  ".",
-  ",",
-  ":",
-  ";",
-  "!",
-  "?",
-  "\\",
-  "'",
-  '"',
-  "`",
-  "}",
-  "]",
-  ")",
-  ">",
-];
-
 const STOP_CHARS = [
   "/",
   "'",
@@ -53,8 +36,10 @@ module.exports = grammar({
 
   externals: ($) => [$.name, $.invalid_token],
 
+  extras: ($) => [$._newline, /\s/],
+
   rules: {
-    source: ($) => repeat(choice($.tag, $._full_uri, alias($._text, "text"))),
+    source: ($) => repeat(choice($.tag, alias($._text, "text"))),
 
     tag: ($) => seq($.name, optional($._user), ":", optional($.text)),
 
@@ -65,37 +50,15 @@ module.exports = grammar({
         /[ \t]+([^\n\r]|\r?\n[^a-zA-Z0-9\n\r]*[a-zA-Z0-9][^\n\r]*)+/,
       ),
 
-    // This token is split into two parts so the end character isn't included in the URI itself.
-    _full_uri: ($) => seq($.uri, choice(alias($._end_char, "text"), /\s/)),
-
-    // This token needs to be single regex, otherwise a partial match will result in an error.
-    uri: ($) => get_uri_regex(),
+    // HACK: for some reason this needs be assigned to a token,
+    // otherwise isn't recognized as an extra.
+    _newline: ($) => /\r?\n/,
 
     // Text tokens can be a single character, or a sequence of characters that aren't stop characters.
     _text: ($) => choice($._stop_char, notmatching(STOP_CHARS)),
     _stop_char: ($) => choice(...STOP_CHARS),
-    _end_char: ($) => choice(...END_CHARS),
   },
 });
-
-/**
- * Get a regex that matches a URI.
- *
- * A URI matches if:
- *
- * - It starts with http:// or https://
- * - It contains at least one character that isn't whitespace or an end character.
- * - If it contains an end character, it must be followed by a non-whitespace or non-end character.
- * - It doesn't end with a whitespace or an end character (this marks the end of the URI).
- *
- * An end character is a character that marks the end of a sentence.
- */
-function get_uri_regex() {
-  let end_chars = escapeRegExp(END_CHARS.join(""));
-  return new RegExp(
-    `https?://([^\\s${end_chars}]|[${end_chars}][^\\s${end_chars}])+`,
-  );
-}
 
 /**
  * Match any characters that aren't whitespace or that aren't in the given list.

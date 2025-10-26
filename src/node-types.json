@@ -11,10 +11,6 @@
         {
           "type": "tag",
           "named": true
-        },
-        {
-          "type": "uri",
-          "named": true
         }
       ]
     }
@@ -121,10 +117,6 @@
   },
   {
     "type": "name",
-    "named": true
-  },
-  {
-    "type": "uri",
     "named": true
   },
   {
