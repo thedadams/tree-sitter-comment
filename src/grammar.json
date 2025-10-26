@@ -12,10 +12,6 @@
             "name": "tag"
           },
           {
-            "type": "SYMBOL",
-            "name": "_full_uri"
-          },
-          {
             "type": "ALIAS",
             "content": {
               "type": "SYMBOL",
@@ -93,36 +89,9 @@
         "value": "[ \\t]+([^\\n\\r]|\\r?\\n[^a-zA-Z0-9\\n\\r]*[a-zA-Z0-9][^\\n\\r]*)+"
       }
     },
-    "_full_uri": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "uri"
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "SYMBOL",
-                "name": "_end_char"
-              },
-              "named": false,
-              "value": "text"
-            },
-            {
-              "type": "PATTERN",
-              "value": "\\s"
-            }
-          ]
-        }
-      ]
-    },
-    "uri": {
+    "_newline": {
       "type": "PATTERN",
-      "value": "https?:\\/\\/([^\\s\\.,:;!\\?\\\\'\"`\\}\\]\\)>]|[\\.,:;!\\?\\\\'\"`\\}\\]\\)>][^\\s\\.,:;!\\?\\\\'\"`\\}\\]\\)>])+"
+      "value": "\\r?\\n"
     },
     "_text": {
       "type": "CHOICE",
@@ -221,70 +190,13 @@
           "value": "-"
         }
       ]
-    },
-    "_end_char": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "."
-        },
-        {
-          "type": "STRING",
-          "value": ","
-        },
-        {
-          "type": "STRING",
-          "value": ":"
-        },
-        {
-          "type": "STRING",
-          "value": ";"
-        },
-        {
-          "type": "STRING",
-          "value": "!"
-        },
-        {
-          "type": "STRING",
-          "value": "?"
-        },
-        {
-          "type": "STRING",
-          "value": "\\"
-        },
-        {
-          "type": "STRING",
-          "value": "'"
-        },
-        {
-          "type": "STRING",
-          "value": "\""
-        },
-        {
-          "type": "STRING",
-          "value": "`"
-        },
-        {
-          "type": "STRING",
-          "value": "}"
-        },
-        {
-          "type": "STRING",
-          "value": "]"
-        },
-        {
-          "type": "STRING",
-          "value": ")"
-        },
-        {
-          "type": "STRING",
-          "value": ">"
-        }
-      ]
     }
   },
   "extras": [
+    {
+      "type": "SYMBOL",
+      "name": "_newline"
+    },
     {
       "type": "PATTERN",
       "value": "\\s"
