@@ -95,7 +95,7 @@
       "members": [
         {
           "type": "SYMBOL",
-          "name": "_code_block_start"
+          "name": "code_block_start"
         },
         {
           "type": "CHOICE",
@@ -143,7 +143,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "_code_block_end"
+          "name": "code_block_end"
         }
       ]
     },
@@ -269,11 +269,11 @@
     },
     {
       "type": "SYMBOL",
-      "name": "_code_block_start"
+      "name": "code_block_start"
     },
     {
       "type": "SYMBOL",
-      "name": "_code_block_end"
+      "name": "code_block_end"
     },
     {
       "type": "SYMBOL",

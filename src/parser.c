@@ -48,8 +48,8 @@ enum ts_symbol_identifiers {
   anon_sym_DASH = 26,
   sym_name = 27,
   sym_text = 28,
-  sym__code_block_start = 29,
-  sym__code_block_end = 30,
+  sym_code_block_start = 29,
+  sym_code_block_end = 30,
   sym_invalid_token = 31,
   sym_source = 32,
   sym_tag = 33,
@@ -90,8 +90,8 @@ static const char * const ts_symbol_names[] = {
   [anon_sym_DASH] = "-",
   [sym_name] = "name",
   [sym_text] = "text",
-  [sym__code_block_start] = "_code_block_start",
-  [sym__code_block_end] = "_code_block_end",
+  [sym_code_block_start] = "code_block_start",
+  [sym_code_block_end] = "code_block_end",
   [sym_invalid_token] = "invalid_token",
   [sym_source] = "source",
   [sym_tag] = "tag",
@@ -132,8 +132,8 @@ static const TSSymbol ts_symbol_map[] = {
   [anon_sym_DASH] = anon_sym_DASH,
   [sym_name] = sym_name,
   [sym_text] = sym_text,
-  [sym__code_block_start] = sym__code_block_start,
-  [sym__code_block_end] = sym__code_block_end,
+  [sym_code_block_start] = sym_code_block_start,
+  [sym_code_block_end] = sym_code_block_end,
   [sym_invalid_token] = sym_invalid_token,
   [sym_source] = sym_source,
   [sym_tag] = sym_tag,
@@ -261,12 +261,12 @@ static const TSSymbolMetadata ts_symbol_metadata[] = {
     .visible = true,
     .named = true,
   },
-  [sym__code_block_start] = {
-    .visible = false,
+  [sym_code_block_start] = {
+    .visible = true,
     .named = true,
   },
-  [sym__code_block_end] = {
-    .visible = false,
+  [sym_code_block_end] = {
+    .visible = true,
     .named = true,
   },
   [sym_invalid_token] = {
@@ -649,8 +649,8 @@ static const uint16_t ts_parse_table[LARGE_STATE_COUNT][SYMBOL_COUNT] = {
     [anon_sym_DASH] = ACTIONS(1),
     [sym_name] = ACTIONS(1),
     [sym_text] = ACTIONS(1),
-    [sym__code_block_start] = ACTIONS(1),
-    [sym__code_block_end] = ACTIONS(1),
+    [sym_code_block_start] = ACTIONS(1),
+    [sym_code_block_end] = ACTIONS(1),
     [sym_invalid_token] = ACTIONS(1),
   },
   [STATE(1)] = {
@@ -684,7 +684,7 @@ static const uint16_t ts_parse_table[LARGE_STATE_COUNT][SYMBOL_COUNT] = {
     [anon_sym_GT] = ACTIONS(7),
     [anon_sym_DASH] = ACTIONS(7),
     [sym_name] = ACTIONS(9),
-    [sym__code_block_start] = ACTIONS(11),
+    [sym_code_block_start] = ACTIONS(11),
   },
   [STATE(2)] = {
     [sym_tag] = STATE(3),
@@ -716,7 +716,7 @@ static const uint16_t ts_parse_table[LARGE_STATE_COUNT][SYMBOL_COUNT] = {
     [anon_sym_GT] = ACTIONS(7),
     [anon_sym_DASH] = ACTIONS(7),
     [sym_name] = ACTIONS(9),
-    [sym__code_block_start] = ACTIONS(11),
+    [sym_code_block_start] = ACTIONS(11),
   },
   [STATE(3)] = {
     [sym_tag] = STATE(3),
@@ -748,7 +748,7 @@ static const uint16_t ts_parse_table[LARGE_STATE_COUNT][SYMBOL_COUNT] = {
     [anon_sym_GT] = ACTIONS(17),
     [anon_sym_DASH] = ACTIONS(17),
     [sym_name] = ACTIONS(20),
-    [sym__code_block_start] = ACTIONS(23),
+    [sym_code_block_start] = ACTIONS(23),
   },
   [STATE(4)] = {
     [ts_builtin_sym_end] = ACTIONS(26),
@@ -776,7 +776,7 @@ static const uint16_t ts_parse_table[LARGE_STATE_COUNT][SYMBOL_COUNT] = {
     [anon_sym_DASH] = ACTIONS(28),
     [sym_name] = ACTIONS(26),
     [sym_text] = ACTIONS(30),
-    [sym__code_block_start] = ACTIONS(26),
+    [sym_code_block_start] = ACTIONS(26),
   },
   [STATE(5)] = {
     [ts_builtin_sym_end] = ACTIONS(32),
@@ -804,7 +804,7 @@ static const uint16_t ts_parse_table[LARGE_STATE_COUNT][SYMBOL_COUNT] = {
     [anon_sym_DASH] = ACTIONS(34),
     [sym_name] = ACTIONS(32),
     [sym_text] = ACTIONS(36),
-    [sym__code_block_start] = ACTIONS(32),
+    [sym_code_block_start] = ACTIONS(32),
   },
   [STATE(6)] = {
     [ts_builtin_sym_end] = ACTIONS(38),
@@ -831,7 +831,7 @@ static const uint16_t ts_parse_table[LARGE_STATE_COUNT][SYMBOL_COUNT] = {
     [anon_sym_GT] = ACTIONS(40),
     [anon_sym_DASH] = ACTIONS(40),
     [sym_name] = ACTIONS(38),
-    [sym__code_block_start] = ACTIONS(38),
+    [sym_code_block_start] = ACTIONS(38),
   },
   [STATE(7)] = {
     [ts_builtin_sym_end] = ACTIONS(42),
@@ -858,7 +858,7 @@ static const uint16_t ts_parse_table[LARGE_STATE_COUNT][SYMBOL_COUNT] = {
     [anon_sym_GT] = ACTIONS(44),
     [anon_sym_DASH] = ACTIONS(44),
     [sym_name] = ACTIONS(42),
-    [sym__code_block_start] = ACTIONS(42),
+    [sym_code_block_start] = ACTIONS(42),
   },
   [STATE(8)] = {
     [ts_builtin_sym_end] = ACTIONS(32),
@@ -885,7 +885,7 @@ static const uint16_t ts_parse_table[LARGE_STATE_COUNT][SYMBOL_COUNT] = {
     [anon_sym_GT] = ACTIONS(34),
     [anon_sym_DASH] = ACTIONS(34),
     [sym_name] = ACTIONS(32),
-    [sym__code_block_start] = ACTIONS(32),
+    [sym_code_block_start] = ACTIONS(32),
   },
   [STATE(9)] = {
     [ts_builtin_sym_end] = ACTIONS(46),
@@ -912,7 +912,7 @@ static const uint16_t ts_parse_table[LARGE_STATE_COUNT][SYMBOL_COUNT] = {
     [anon_sym_GT] = ACTIONS(48),
     [anon_sym_DASH] = ACTIONS(48),
     [sym_name] = ACTIONS(46),
-    [sym__code_block_start] = ACTIONS(46),
+    [sym_code_block_start] = ACTIONS(46),
   },
   [STATE(10)] = {
     [ts_builtin_sym_end] = ACTIONS(50),
@@ -939,7 +939,7 @@ static const uint16_t ts_parse_table[LARGE_STATE_COUNT][SYMBOL_COUNT] = {
     [anon_sym_GT] = ACTIONS(52),
     [anon_sym_DASH] = ACTIONS(52),
     [sym_name] = ACTIONS(50),
-    [sym__code_block_start] = ACTIONS(50),
+    [sym_code_block_start] = ACTIONS(50),
   },
   [STATE(11)] = {
     [ts_builtin_sym_end] = ACTIONS(54),
@@ -966,7 +966,7 @@ static const uint16_t ts_parse_table[LARGE_STATE_COUNT][SYMBOL_COUNT] = {
     [anon_sym_GT] = ACTIONS(56),
     [anon_sym_DASH] = ACTIONS(56),
     [sym_name] = ACTIONS(54),
-    [sym__code_block_start] = ACTIONS(54),
+    [sym_code_block_start] = ACTIONS(54),
   },
 };
 
@@ -993,14 +993,14 @@ static const uint16_t ts_small_parse_table[] = {
     ACTIONS(68), 1,
       aux_sym_code_block_token3,
     ACTIONS(70), 1,
-      sym__code_block_end,
+      sym_code_block_end,
   [33] = 3,
     ACTIONS(62), 1,
       sym__newline,
     ACTIONS(72), 1,
       aux_sym_code_block_token3,
     ACTIONS(74), 1,
-      sym__code_block_end,
+      sym_code_block_end,
   [43] = 2,
     ACTIONS(3), 1,
       sym__newline,
@@ -1025,7 +1025,7 @@ static const uint16_t ts_small_parse_table[] = {
     ACTIONS(3), 1,
       sym__newline,
     ACTIONS(74), 1,
-      sym__code_block_end,
+      sym_code_block_end,
   [78] = 2,
     ACTIONS(3), 1,
       sym__newline,
@@ -1040,7 +1040,7 @@ static const uint16_t ts_small_parse_table[] = {
     ACTIONS(3), 1,
       sym__newline,
     ACTIONS(88), 1,
-      sym__code_block_end,
+      sym_code_block_end,
 };
 
 static const uint32_t ts_small_parse_table_map[] = {
@@ -1108,16 +1108,16 @@ static const TSParseActionEntry ts_parse_actions[] = {
 enum ts_external_scanner_symbol_identifiers {
   ts_external_token_name = 0,
   ts_external_token_text = 1,
-  ts_external_token__code_block_start = 2,
-  ts_external_token__code_block_end = 3,
+  ts_external_token_code_block_start = 2,
+  ts_external_token_code_block_end = 3,
   ts_external_token_invalid_token = 4,
 };
 
 static const TSSymbol ts_external_scanner_symbol_map[EXTERNAL_TOKEN_COUNT] = {
   [ts_external_token_name] = sym_name,
   [ts_external_token_text] = sym_text,
-  [ts_external_token__code_block_start] = sym__code_block_start,
-  [ts_external_token__code_block_end] = sym__code_block_end,
+  [ts_external_token_code_block_start] = sym_code_block_start,
+  [ts_external_token_code_block_end] = sym_code_block_end,
   [ts_external_token_invalid_token] = sym_invalid_token,
 };
 
@@ -1125,21 +1125,21 @@ static const bool ts_external_scanner_states[5][EXTERNAL_TOKEN_COUNT] = {
   [1] = {
     [ts_external_token_name] = true,
     [ts_external_token_text] = true,
-    [ts_external_token__code_block_start] = true,
-    [ts_external_token__code_block_end] = true,
+    [ts_external_token_code_block_start] = true,
+    [ts_external_token_code_block_end] = true,
     [ts_external_token_invalid_token] = true,
   },
   [2] = {
     [ts_external_token_name] = true,
-    [ts_external_token__code_block_start] = true,
+    [ts_external_token_code_block_start] = true,
   },
   [3] = {
     [ts_external_token_name] = true,
     [ts_external_token_text] = true,
-    [ts_external_token__code_block_start] = true,
+    [ts_external_token_code_block_start] = true,
   },
   [4] = {
-    [ts_external_token__code_block_end] = true,
+    [ts_external_token_code_block_end] = true,
   },
 };
 

@@ -36,17 +36,16 @@ module.exports = grammar({
 
   externals: ($) => [
     $.name,
-	$.text,
-    $._code_block_start,
-    $._code_block_end,
+    $.text,
+    $.code_block_start,
+    $.code_block_end,
     $.invalid_token,
   ],
 
   extras: ($) => [$._newline, /\s/],
 
   rules: {
-    source: ($) =>
-      repeat(choice($.tag, $.code_block, alias($._text, "text"))),
+    source: ($) => repeat(choice($.tag, $.code_block, alias($._text, "text"))),
 
     tag: ($) => seq($.name, optional($._user), ":", optional($.text)),
 
@@ -57,11 +56,11 @@ module.exports = grammar({
 
     code_block: ($) =>
       seq(
-        $._code_block_start,
+        $.code_block_start,
         optional(alias(token.immediate(/[^\r\n]+/), $.language)),
         token.immediate(/\r?\n/),
         optional(alias(/([^\n`]|`[^`\n]|``[^`\n]|\n)+/, $.code_block_content)),
-        $._code_block_end,
+        $.code_block_end,
       ),
 
     // Text tokens can be a single character, or a sequence of characters that aren't stop characters.

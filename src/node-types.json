@@ -5,10 +5,18 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "code_block_content",
+          "named": true
+        },
+        {
+          "type": "code_block_end",
+          "named": true
+        },
+        {
+          "type": "code_block_start",
           "named": true
         },
         {
@@ -140,6 +148,14 @@
   },
   {
     "type": "code_block_content",
+    "named": true
+  },
+  {
+    "type": "code_block_end",
+    "named": true
+  },
+  {
+    "type": "code_block_start",
     "named": true
   },
   {

@@ -21,11 +21,11 @@ static bool is_digit(int32_t c)
   return c >= upper && c <= lower;
 }
 
-
 static bool is_eof(int32_t c)
 {
     return c == CHAR_EOF;
 }
+
 static bool is_alpha(int32_t c)
 {
   return is_upper(c) || is_lower(c);
