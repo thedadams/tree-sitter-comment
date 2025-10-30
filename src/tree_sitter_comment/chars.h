@@ -15,6 +15,7 @@
 
 static bool is_possible_start_of_tag(int32_t c);
 static bool is_internal_char(int32_t c);
+static bool is_eof(int32_t c);
 static bool is_newline(int32_t c);
 static bool is_space(int32_t c);
 static bool is_upper(int32_t c);

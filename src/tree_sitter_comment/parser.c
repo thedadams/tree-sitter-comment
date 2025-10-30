@@ -16,7 +16,7 @@
 /// - TODO (thedadams): text
 static bool parse_tagname(TSLexer* lexer, const bool* valid_symbols)
 {
-  while (is_possible_start_of_tag(lexer->lookahead) || is_space(lexer->lookahead) && !is_newline(lexer->lookahead)) {
+  while (is_possible_start_of_tag(lexer->lookahead)) {
     lexer->advance(lexer, false);
   }
 
@@ -86,12 +86,55 @@ static bool parse_tagname(TSLexer* lexer, const bool* valid_symbols)
   return true;
 }
 
+static bool parse_tagtext(TSLexer* lexer, const bool* valid_symbols) {
+  bool has_text = false;
+  while (!is_eof(lexer->lookahead)) {
+    while(is_possible_start_of_tag(lexer->lookahead)) {
+      lexer->mark_end(lexer);
+      lexer->advance(lexer, false);
+    }
+
+    if (is_newline(lexer->lookahead)) {
+      if (!has_text) {
+        return false;
+      }
+
+      lexer->result_symbol = T_TAGTEXT;
+      return true;
+    }
+
+    has_text = true;
+
+    while (!is_newline(lexer->lookahead)) {
+      lexer->advance(lexer, false);
+    }
+
+    if (!is_eof(lexer->lookahead)) {
+      lexer->advance(lexer, false);
+    }
+
+    lexer->mark_end(lexer);
+  }
+
+  if (!has_text) {
+    return false;
+  }
+
+  lexer->result_symbol = T_TAGTEXT;
+  return true;
+}
+
 static bool parse(TSLexer* lexer, const bool* valid_symbols)
 {
   // If all valid symbols are true, tree-sitter is in correction mode.
   // We don't want to parse anything in that case.
-  if (valid_symbols[T_INVALID_TOKEN] || lexer->get_column(lexer) != 0) {
+  if (valid_symbols[T_INVALID_TOKEN] || lexer->get_column(lexer) != 0 && !valid_symbols[T_TAGTEXT]) {
     return false;
+  }
+
+  // Text is only valid if we are not on a new line. We would have parsed all of the text before this point.
+  if (valid_symbols[T_TAGTEXT] && lexer->get_column(lexer) != 0) {
+    return parse_tagtext(lexer, valid_symbols);
   }
 
   if (valid_symbols[T_TAGNAME] && (is_upper(lexer->lookahead) || is_possible_start_of_tag(lexer->lookahead))) {
