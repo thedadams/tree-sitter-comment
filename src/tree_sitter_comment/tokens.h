@@ -3,6 +3,7 @@
 
 enum TokenType {
   T_TAGNAME,
+  T_TAGTEXT,
   T_INVALID_TOKEN,
 };
 

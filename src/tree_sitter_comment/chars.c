@@ -14,6 +14,12 @@ static bool is_digit(int32_t c)
   return c >= upper && c <= lower;
 }
 
+
+static bool is_eof(int32_t c)
+{
+    return c == CHAR_EOF;
+}
+
 static bool is_newline(int32_t c)
 {
   const int32_t newline_chars[] = {
@@ -39,14 +45,12 @@ static bool is_space(int32_t c)
     CHAR_VERTICAL_TAB,
   };
   const int length = sizeof(space_chars) / sizeof(int32_t);
-  bool is_space_char = false;
   for (int i = 0; i < length; i++) {
     if (c == space_chars[i]) {
-      is_space_char = true;
-      break;
+      return true;
     }
   }
-  return is_space_char || is_newline(c);
+  return is_newline(c);
 }
 
 /// Check if the character is allowed inside the name.
@@ -76,6 +80,8 @@ static bool is_possible_start_of_tag(int32_t c)
     '+',
     '-',
     '!',
+    CHAR_SPACE,
+    CHAR_TAB,
   };
   const int length = sizeof(valid_chars) / sizeof(int32_t);
   for (int i = 0; i < length; i++) {

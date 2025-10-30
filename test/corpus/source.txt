@@ -97,7 +97,7 @@ HACK: Single blank line below acts as separator
 TODO: New section
 with more text
 across lines
-TODO: another line, but part of the above
+TODO: This is actually a new valid tag now
 
 "TODO(user): This is a task
 that spans multiple lines
@@ -148,6 +148,16 @@ TODO: New section
 -
 DOPE:
 
+* TODO:
+* NOTE: This is a different tag than the one above
+
+* TODO: Some text
+* NOTE: This is part of the tag above
+
+ * TODO:
+ *
+ * NOTE: Implement this function
+
 --------------------------------------------------------------------------------
 
 (source
@@ -170,7 +180,20 @@ DOPE:
     (name)
     (text))
   (tag
-    (name)))
+    (name))
+  (tag
+    (name))
+  (tag
+    (name)
+    (text))
+  (tag
+    (name)
+    (text))
+  (tag
+    (name))
+  (tag
+    (name)
+    (text)))
 
 ================================================================================
 Comment-type characters to start line
@@ -195,6 +218,14 @@ TODO: New section
 -
 DOPE:
 
+ * TODO: This is a task that starts with a space
+ * that spans multiple lines
+ * and continues here.
+ * Not parsed because of beginning
+ *
+ * NOTE: This is a note that starts with a space
+ * FIX:ME: This is still part of the NOTE
+
 --------------------------------------------------------------------------------
 
 (source
@@ -217,4 +248,10 @@ DOPE:
     (name)
     (text))
   (tag
-    (name)))
+    (name))
+  (tag
+    (name)
+    (text))
+  (tag
+    (name)
+    (text)))

@@ -82,13 +82,6 @@
         }
       ]
     },
-    "text": {
-      "type": "IMMEDIATE_TOKEN",
-      "content": {
-        "type": "PATTERN",
-        "value": "[ \\t]+([^\\n\\r]|\\r?\\n[^a-zA-Z0-9\\n\\r]*[a-zA-Z0-9][^\\n\\r]*)+"
-      }
-    },
     "_newline": {
       "type": "PATTERN",
       "value": "\\r?\\n"
@@ -208,6 +201,10 @@
     {
       "type": "SYMBOL",
       "name": "name"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "text"
     },
     {
       "type": "SYMBOL",
