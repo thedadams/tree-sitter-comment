@@ -80,6 +80,7 @@ static bool is_possible_start_of_tag(int32_t c)
     '+',
     '-',
     '!',
+    '|',
     CHAR_SPACE,
     CHAR_TAB,
   };
