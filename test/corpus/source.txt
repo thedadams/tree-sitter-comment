@@ -8,7 +8,7 @@ XXX: fix something else.
 
 TODO:    extra white spaces.
 
-NOTAG:missing space
+NOTAG:missing space still works
 
 (TODO: I'm inside parentheses, doesn't work)
 
@@ -17,6 +17,47 @@ NOTE:
 "NOTE: this should not work!"
 
 DEBUG: thís shoúld wórk with $weird$ symbols
+
+--------------------------------------------------------------------------------
+
+(source
+  (tag
+    (name)
+    (text))
+  (tag
+    (name)
+    (text))
+  (tag
+    (name)
+    (text))
+  (tag
+    (name)
+    (text))
+  (tag
+    (name))
+  (tag
+    (name)
+    (text)))
+
+================================================================================
+Simple tags without colon
+================================================================================
+
+TODO something
+
+XXX fix something else.
+
+TODO     extra white spaces.
+
+NOTAGmissing space here does not work
+
+(TODO I'm inside parentheses, doesn't work)
+
+NOTE
+
+"NOTE this should not work!"
+
+DEBUG thís shoúld wórk with $weird$ symbols
 
 --------------------------------------------------------------------------------
 
@@ -46,7 +87,7 @@ XXX (monday): fix something else.
 
 TODO(@todo):    extra white spaces.
 
-NOTAG(tag):missing space
+NOTAG(tag):missing space still works
 
 (TODO (someone): I'm inside parentheses, doesn't work)
 
@@ -54,7 +95,9 @@ NOTE(a user):
 
 "NOTE (a user): this should not work!"
 
-FIXME(): This isn't a valid tag (user is missing)
+FIXME(): This is a valid tag even though the user is missing
+
+HACK(user: not a valid tag because of the missing parentheses
 
 --------------------------------------------------------------------------------
 
@@ -73,7 +116,62 @@ FIXME(): This isn't a valid tag (user is missing)
     (text))
   (tag
     (name)
-    (user)))
+    (user)
+    (text))
+  (tag
+    (name)
+    (user))
+  (tag
+    (name)
+    (user)
+    (text)))
+
+================================================================================
+Decorated tags without colon
+================================================================================
+
+TODO(thedadams) something
+
+XXX (monday) fix something else.
+
+TODO(@todo)    extra white spaces.
+
+NOTAG(tag)missing space still works
+
+(TODO (someone) I'm inside parentheses, doesn't work)
+
+NOTE(a user)
+
+"NOTE (a user) this should not work!"
+
+FIXME() This is a valid tag even though the user is missing
+
+--------------------------------------------------------------------------------
+
+(source
+  (tag
+    (name)
+    (user)
+    (text))
+  (tag
+    (name)
+    (user)
+    (text))
+  (tag
+    (name)
+    (user)
+    (text))
+  (tag
+    (name)
+    (user)
+    (text))
+  (tag
+    (name)
+    (user))
+  (tag
+    (name)
+    (user)
+    (text)))
 
 ================================================================================
 Multi-line text
@@ -100,6 +198,61 @@ across lines
 TODO: This is actually a new valid tag now
 
 "TODO(user): This is a task
+that spans multiple lines
+and continues here.
+Not parsed because of beginning "
+
+--------------------------------------------------------------------------------
+
+(source
+  (tag
+    (name)
+    (text))
+  (tag
+    (name)
+    (text))
+  (tag
+    (name)
+    (user)
+    (text))
+  (tag
+    (name)
+    (text))
+  (tag
+    (name)
+    (text))
+  (tag
+    (name)
+    (text)))
+
+================================================================================
+Multi-line text without colon
+================================================================================
+
+TODO This is a task
+that spans multiple lines
+and continues here
+
+FIXME Another tag after blank line
+
+TODO(user) Multi-line with user
+also spans lines
+
+BUG This spans
+multiple lines with special chars: @#$%
+and continues...
+
+HACK Single blank line below acts as separator
+
+HACKths doesn't work because of the lack of space
+even if I continue on the next line
+
+TODO New section
+with more text
+across lines
+TODO This is actually a new valid tag now
+
+"TODO(user) This is a task
 that spans multiple lines
 and continues here.
 Not parsed because of beginning "
@@ -196,6 +349,74 @@ DOPE:
     (text)))
 
 ================================================================================
+Non-alphanumeric lines break capture without colon
+================================================================================
+
+TODO This is a line
+This spans multi-line
+* /
+WARN This is now a new group.
+
+NOTE First item
+- has alphanumeric
+---
+BUG Symbols only line breaks it
+
+FIXME Another example
+continues here
+*/
+TODO New section
+-
+DOPE
+
+* TODO
+* NOTE This is a different tag than the one above
+
+* TODO Some text
+* NOTE This is part of the tag above
+
+ * TODO
+ *
+ * NOTE Implement this function
+
+--------------------------------------------------------------------------------
+
+(source
+  (tag
+    (name)
+    (text))
+  (tag
+    (name)
+    (text))
+  (tag
+    (name)
+    (text))
+  (tag
+    (name)
+    (text))
+  (tag
+    (name)
+    (text))
+  (tag
+    (name)
+    (text))
+  (tag
+    (name))
+  (tag
+    (name))
+  (tag
+    (name)
+    (text))
+  (tag
+    (name)
+    (text))
+  (tag
+    (name))
+  (tag
+    (name)
+    (text)))
+
+================================================================================
 Comment-type characters to start line
 ================================================================================
 
@@ -225,6 +446,67 @@ DOPE:
  *
  * NOTE: This is a note that starts with a space
  * FIX:ME: This is still part of the NOTE
+
+--------------------------------------------------------------------------------
+
+(source
+  (tag
+    (name)
+    (text))
+  (tag
+    (name)
+    (text))
+  (tag
+    (name)
+    (text))
+  (tag
+    (name)
+    (text))
+  (tag
+    (name)
+    (text))
+  (tag
+    (name)
+    (text))
+  (tag
+    (name))
+  (tag
+    (name)
+    (text))
+  (tag
+    (name)
+    (text)))
+
+================================================================================
+Comment-type characters to start line without colon
+================================================================================
+
+* TODO This is a line
+This spans multi-line
+* /
+WARN This is now a new group.
+
+*
+
+NOTE First item
+- has alphanumeric
+---
+*BUG Symbols only line breaks it
+
+#FIXME Another example
+continues here
+*/
+TODO New section
+-
+DOPE
+
+ * TODO This is a task that starts with a space
+ * that spans multiple lines
+ * and continues here.
+ * Not parsed because of beginning
+ *
+ * NOTE This is a note that starts with a space
+ * FIXME This is still part of the NOTE
 
 --------------------------------------------------------------------------------
 

@@ -19,6 +19,8 @@ static bool is_eof(int32_t c);
 static bool is_newline(int32_t c);
 static bool is_space(int32_t c);
 static bool is_upper(int32_t c);
+static bool is_lower(int32_t c);
+static bool is_alpha(int32_t c);
 static bool is_digit(int32_t c);
 
 #endif /* ifndef TREE_SITTER_COMMENT_CHARS_H */
