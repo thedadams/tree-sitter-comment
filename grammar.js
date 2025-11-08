@@ -41,9 +41,16 @@ module.exports = grammar({
   rules: {
     source: ($) => repeat(choice($.tag, alias($._text, "text"))),
 
-    tag: ($) => seq($.name, optional($._user), ":", optional($.text)),
+    tag: ($) =>
+      prec.right(
+        seq(
+          $.name,
+          optional($._user),
+          choice(seq(":", optional($.text)), optional($.text)),
+        ),
+      ),
 
-    _user: ($) => seq("(", alias(/[^()]+/, $.user), ")"),
+    _user: ($) => seq("(", alias(/[^()]*/, $.user), ")"),
 
     // HACK: for some reason this needs be assigned to a token, otherwise isn't recognized as an extra.
     _newline: ($) => /\r?\n/,

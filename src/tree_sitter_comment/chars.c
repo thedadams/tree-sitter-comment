@@ -7,6 +7,13 @@ static bool is_upper(int32_t c)
   return c >= upper && c <= lower;
 }
 
+static bool is_lower(int32_t c)
+{
+  const int32_t upper = 97;
+  const int32_t lower = 122;
+  return c >= upper && c <= lower;
+}
+
 static bool is_digit(int32_t c)
 {
   const int32_t upper = 48;
@@ -14,6 +21,10 @@ static bool is_digit(int32_t c)
   return c >= upper && c <= lower;
 }
 
+static bool is_alpha(int32_t c)
+{
+  return is_upper(c) || is_lower(c);
+}
 
 static bool is_eof(int32_t c)
 {

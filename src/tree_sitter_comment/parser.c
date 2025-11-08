@@ -9,11 +9,13 @@
 /// Parse the name of the tag.
 ///
 /// They can be of the form:
+/// - TODO
 /// - TODO:
 /// - TODO: text
+/// - TODO(thedadams)
 /// - TODO(thedadams):
 /// - TODO(thedadams): text
-/// - TODO (thedadams): text
+/// - TODO (thedadams) : text
 static bool parse_tagname(TSLexer* lexer, const bool* valid_symbols)
 {
   while (is_possible_start_of_tag(lexer->lookahead)) {
@@ -38,7 +40,7 @@ static bool parse_tagname(TSLexer* lexer, const bool* valid_symbols)
   lexer->mark_end(lexer);
 
   // It can't end with an internal char.
-  if (is_internal_char(previous)) {
+  if (is_internal_char(previous) || is_alpha(lexer->lookahead)) {
     return false;
   }
 
@@ -52,34 +54,18 @@ static bool parse_tagname(TSLexer* lexer, const bool* valid_symbols)
     }
     // Checking aperture.
     if (lexer->lookahead != '(') {
-      return false;
+      lexer->result_symbol = T_TAGNAME;
+      return true;
     }
     lexer->advance(lexer, false);
 
     // Checking closure.
-    int user_length = 0;
     while (lexer->lookahead != ')') {
       if (is_newline(lexer->lookahead)) {
         return false;
       }
       lexer->advance(lexer, false);
-      user_length++;
     }
-    if (user_length == 0) {
-      return false;
-    }
-    lexer->advance(lexer, false);
-  }
-
-  // It should end with `:`...
-  if (lexer->lookahead != ':') {
-    return false;
-  }
-
-  // ... and be followed by one space.
-  lexer->advance(lexer, false);
-  if (!is_space(lexer->lookahead)) {
-    return false;
   }
 
   lexer->result_symbol = T_TAGNAME;
@@ -94,7 +80,7 @@ static bool parse_tagtext(TSLexer* lexer, const bool* valid_symbols) {
       lexer->advance(lexer, false);
     }
 
-    if (is_newline(lexer->lookahead)) {
+    if (is_newline(lexer->lookahead) || lexer->lookahead == '(') {
       if (!has_text) {
         return false;
       }
@@ -133,8 +119,12 @@ static bool parse(TSLexer* lexer, const bool* valid_symbols)
   }
 
   // Text is only valid if we are not on a new line. We would have parsed all of the text before this point.
-  if (valid_symbols[T_TAGTEXT] && lexer->get_column(lexer) != 0) {
-    return parse_tagtext(lexer, valid_symbols);
+  if (lexer->get_column(lexer) != 0) {
+    if (valid_symbols[T_TAGTEXT] && lexer->lookahead != ':' && lexer->lookahead != '(') {
+      return parse_tagtext(lexer, valid_symbols);
+    }
+
+    return false;
   }
 
   if (valid_symbols[T_TAGNAME] && (is_upper(lexer->lookahead) || is_possible_start_of_tag(lexer->lookahead))) {
