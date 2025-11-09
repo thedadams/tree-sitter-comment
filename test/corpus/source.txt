@@ -34,7 +34,8 @@ DEBUG: thís shoúld wórk with $weird$ symbols
     (name)
     (text))
   (tag
-    (name))
+    (name)
+    (text))
   (tag
     (name)
     (text)))
@@ -120,7 +121,8 @@ HACK(user: not a valid tag because of the missing parentheses
     (text))
   (tag
     (name)
-    (user))
+    (user)
+    (text))
   (tag
     (name)
     (user)
@@ -302,7 +304,7 @@ TODO: New section
 DOPE:
 
 * TODO:
-* NOTE: This is a different tag than the one above
+* NOTE: This is still part of the TODO above
 
 * TODO: Some text
 * NOTE: This is part of the tag above
@@ -333,17 +335,17 @@ DOPE:
     (name)
     (text))
   (tag
-    (name))
-  (tag
-    (name))
-  (tag
     (name)
     (text))
   (tag
     (name)
     (text))
   (tag
-    (name))
+    (name)
+    (text))
+  (tag
+    (name)
+    (text))
   (tag
     (name)
     (text)))
@@ -445,7 +447,7 @@ DOPE:
  * Not parsed because of beginning
  *
  * NOTE: This is a note that starts with a space
- * FIX:ME: This is still part of the NOTE
+ * FIXME: This is still part of the NOTE
 
 --------------------------------------------------------------------------------
 
@@ -469,7 +471,8 @@ DOPE:
     (name)
     (text))
   (tag
-    (name))
+    (name)
+    (text))
   (tag
     (name)
     (text))
