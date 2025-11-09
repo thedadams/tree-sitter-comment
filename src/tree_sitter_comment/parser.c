@@ -2,9 +2,25 @@
 
 #include "parser.h"
 #include "tokens.h"
+#include "tree_sitter/parser.h"
 #include "tree_sitter_comment/chars.h"
 #include <stdbool.h>
 #include <stdio.h>
+
+static bool parse_tagstart(TSLexer* lexer) {
+  while(is_possible_start_of_tag(lexer->lookahead)) {
+    lexer->advance(lexer, false);
+  }
+
+  lexer->mark_end(lexer);
+
+  if (!parse_tagname(lexer, false)) {
+    return false;
+  }
+
+  lexer->result_symbol = T_TAGSTART;
+  return true;
+}
 
 /// Parse the name of the tag.
 ///
@@ -16,12 +32,7 @@
 /// - TODO(thedadams):
 /// - TODO(thedadams): text
 /// - TODO (thedadams) : text
-static bool parse_tagname(TSLexer* lexer, const bool* valid_symbols)
-{
-  while (is_possible_start_of_tag(lexer->lookahead)) {
-    lexer->advance(lexer, false);
-  }
-
+static bool parse_tagname(TSLexer* lexer, bool mark_end) {
   if (!is_upper(lexer->lookahead)) {
     return false;
   }
@@ -37,7 +48,9 @@ static bool parse_tagname(TSLexer* lexer, const bool* valid_symbols)
   }
   // The tag name ends here.
   // But we keep parsing to see if it's a valid tag name.
-  lexer->mark_end(lexer);
+  if (mark_end) {
+    lexer->mark_end(lexer);
+  }
 
   // It can't end with an internal char.
   if (is_internal_char(previous) || is_alpha(lexer->lookahead)) {
@@ -46,8 +59,7 @@ static bool parse_tagname(TSLexer* lexer, const bool* valid_symbols)
 
   // For the user component this is `\s*(`.
   // We don't parse that part, we just need to be sure it ends with `:\s`.
-  if ((is_space(lexer->lookahead) && !is_newline(lexer->lookahead))
-      || lexer->lookahead == '(') {
+  if ((is_space(lexer->lookahead) && !is_newline(lexer->lookahead)) || lexer->lookahead == '(') {
     // Skip white spaces.
     while (is_space(lexer->lookahead) && !is_newline(lexer->lookahead)) {
       lexer->advance(lexer, false);
@@ -72,7 +84,7 @@ static bool parse_tagname(TSLexer* lexer, const bool* valid_symbols)
   return true;
 }
 
-static bool parse_tagtext(TSLexer* lexer, const bool* valid_symbols) {
+static bool parse_tagtext(TSLexer* lexer) {
   bool has_text = false;
   while (!is_eof(lexer->lookahead)) {
     while(is_possible_start_of_tag(lexer->lookahead)) {
@@ -109,25 +121,32 @@ static bool parse_tagtext(TSLexer* lexer, const bool* valid_symbols) {
   return true;
 }
 
-static bool parse(TSLexer* lexer, const bool* valid_symbols)
-{
+static bool parse(TSLexer* lexer, const bool* valid_symbols) {
   // If all valid symbols are true, tree-sitter is in correction mode.
   // We don't want to parse anything in that case.
-  if (valid_symbols[T_INVALID_TOKEN] || lexer->get_column(lexer) != 0 && !valid_symbols[T_TAGTEXT]) {
+  if (valid_symbols[T_INVALID_TOKEN]) {
     return false;
   }
 
   // Text is only valid if we are not on a new line. We would have parsed all of the text before this point.
   if (lexer->get_column(lexer) != 0) {
     if (valid_symbols[T_TAGTEXT] && lexer->lookahead != '(') {
-      return parse_tagtext(lexer, valid_symbols);
+      return parse_tagtext(lexer);
+    }
+
+    if (!valid_symbols[T_TAGSTART] && valid_symbols[T_TAGNAME] && is_upper(lexer->lookahead)) {
+      return parse_tagname(lexer, true);
     }
 
     return false;
   }
 
-  if (valid_symbols[T_TAGNAME] && (is_upper(lexer->lookahead) || is_possible_start_of_tag(lexer->lookahead))) {
-    return parse_tagname(lexer, valid_symbols);
+  if (valid_symbols[T_TAGSTART] && is_possible_start_of_tag(lexer->lookahead)) {
+    return parse_tagstart(lexer);
+  }
+
+  if (valid_symbols[T_TAGNAME] && is_upper(lexer->lookahead)) {
+    return parse_tagname(lexer, true);
   }
 
   return false;

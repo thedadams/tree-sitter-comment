@@ -34,14 +34,17 @@ const STOP_CHARS = [
 module.exports = grammar({
   name: "comment",
 
-  externals: ($) => [$.name, $.text, $.invalid_token],
+  externals: ($) => [$.start, $.name, $.text, $.invalid_token],
 
   extras: ($) => [$._newline, /\s/],
 
   rules: {
     source: ($) => repeat(choice($.tag, alias($._text, "text"))),
 
-    tag: ($) => prec.right(seq($.name, optional($._user), optional($.text))),
+    tag: ($) =>
+      prec.right(
+        seq(optional($.start), $.name, optional($._user), optional($.text)),
+      ),
 
     _user: ($) => seq("(", alias(/[^()]*/, $.user), ")"),
 

@@ -338,15 +338,19 @@ DOPE:
     (name)
     (text))
   (tag
+    (start)
     (name)
     (text))
   (tag
+    (start)
     (name)
     (text))
   (tag
+    (start)
     (name)
     (text))
   (tag
+    (start)
     (name)
     (text)))
 
@@ -405,16 +409,21 @@ DOPE
   (tag
     (name))
   (tag
+    (start)
     (name))
   (tag
+    (start)
     (name)
     (text))
   (tag
+    (start)
     (name)
     (text))
   (tag
+    (start)
     (name))
   (tag
+    (start)
     (name)
     (text)))
 
@@ -449,10 +458,13 @@ DOPE:
  * NOTE: This is a note that starts with a space
  * FIXME: This is still part of the NOTE
 
+// This shouldn't be parsed as a tag
+
 --------------------------------------------------------------------------------
 
 (source
   (tag
+    (start)
     (name)
     (text))
   (tag
@@ -462,6 +474,11 @@ DOPE:
     (name)
     (text))
   (tag
+    (start)
+    (name)
+    (text))
+  (tag
+    (start)
     (name)
     (text))
   (tag
@@ -471,12 +488,11 @@ DOPE:
     (name)
     (text))
   (tag
+    (start)
     (name)
     (text))
   (tag
-    (name)
-    (text))
-  (tag
+    (start)
     (name)
     (text)))
 
@@ -511,10 +527,13 @@ DOPE
  * NOTE This is a note that starts with a space
  * FIXME This is still part of the NOTE
 
+// This shouldn't be parsed as a tag
+
 --------------------------------------------------------------------------------
 
 (source
   (tag
+    (start)
     (name)
     (text))
   (tag
@@ -524,9 +543,11 @@ DOPE
     (name)
     (text))
   (tag
+    (start)
     (name)
     (text))
   (tag
+    (start)
     (name)
     (text))
   (tag
@@ -535,8 +556,10 @@ DOPE
   (tag
     (name))
   (tag
+    (start)
     (name)
     (text))
   (tag
+    (start)
     (name)
     (text)))
