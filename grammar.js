@@ -41,14 +41,7 @@ module.exports = grammar({
   rules: {
     source: ($) => repeat(choice($.tag, alias($._text, "text"))),
 
-    tag: ($) =>
-      prec.right(
-        seq(
-          $.name,
-          optional($._user),
-          choice(seq(":", optional($.text)), optional($.text)),
-        ),
-      ),
+    tag: ($) => prec.right(seq($.name, optional($._user), optional($.text))),
 
     _user: ($) => seq("(", alias(/[^()]*/, $.user), ")"),
 

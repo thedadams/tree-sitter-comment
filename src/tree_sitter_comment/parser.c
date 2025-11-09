@@ -120,7 +120,7 @@ static bool parse(TSLexer* lexer, const bool* valid_symbols)
 
   // Text is only valid if we are not on a new line. We would have parsed all of the text before this point.
   if (lexer->get_column(lexer) != 0) {
-    if (valid_symbols[T_TAGTEXT] && lexer->lookahead != ':' && lexer->lookahead != '(') {
+    if (valid_symbols[T_TAGTEXT] && lexer->lookahead != '(') {
       return parse_tagtext(lexer, valid_symbols);
     }
 
