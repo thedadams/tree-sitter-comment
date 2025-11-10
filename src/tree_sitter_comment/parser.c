@@ -76,7 +76,6 @@ static bool parse_tagtext(TSLexer* lexer, const bool* valid_symbols) {
   bool has_text = false;
   while (!is_eof(lexer->lookahead)) {
     while(is_possible_start_of_tag(lexer->lookahead)) {
-      lexer->mark_end(lexer);
       lexer->advance(lexer, false);
     }
 
