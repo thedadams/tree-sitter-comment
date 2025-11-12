@@ -94,11 +94,11 @@ static bool parse_tagtext(TSLexer* lexer, const bool* valid_symbols) {
       lexer->advance(lexer, false);
     }
 
+    lexer->mark_end(lexer);
+
     if (!is_eof(lexer->lookahead)) {
       lexer->advance(lexer, false);
     }
-
-    lexer->mark_end(lexer);
   }
 
   if (!has_text) {
