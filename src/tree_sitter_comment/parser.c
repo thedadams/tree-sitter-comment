@@ -74,7 +74,7 @@ static bool parse_tagname(TSLexer* lexer, const bool* valid_symbols)
 
 static bool parse_tagtext(TSLexer* lexer, const bool* valid_symbols) {
   bool has_text = false;
-  while (!is_eof(lexer->lookahead)) {
+  while (true) {
     while(is_possible_start_of_tag(lexer->lookahead)) {
       lexer->advance(lexer, false);
     }
@@ -96,8 +96,12 @@ static bool parse_tagtext(TSLexer* lexer, const bool* valid_symbols) {
 
     lexer->mark_end(lexer);
 
-    if (!is_eof(lexer->lookahead)) {
+    lexer->advance(lexer, false);
+    if (is_eof(lexer->lookahead) && lexer->get_column(lexer) == 0) {
       lexer->advance(lexer, false);
+      if (is_eof(lexer->lookahead) && lexer->get_column(lexer) == 0) {
+        break;
+      }
     }
   }
 
@@ -109,8 +113,7 @@ static bool parse_tagtext(TSLexer* lexer, const bool* valid_symbols) {
   return true;
 }
 
-static bool parse(TSLexer* lexer, const bool* valid_symbols)
-{
+static bool parse(TSLexer* lexer, const bool* valid_symbols) {
   // If all valid symbols are true, tree-sitter is in correction mode.
   // We don't want to parse anything in that case.
   if (valid_symbols[T_INVALID_TOKEN] || lexer->get_column(lexer) != 0 && !valid_symbols[T_TAGTEXT]) {
