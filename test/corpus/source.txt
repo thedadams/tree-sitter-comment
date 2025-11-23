@@ -451,6 +451,8 @@ DOPE:
 
 //TODO: * (e^(-i 2*pi)^(1/N kn))
 
+//TODO ((e^(-i 2*pi)^(1/N kn)): This doesn't match because there is a missing closing parenthesis
+
 // HACK: * e()
 
 //FIX: (e^())

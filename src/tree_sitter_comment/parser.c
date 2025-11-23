@@ -58,10 +58,20 @@ static bool parse_tagname(TSLexer* lexer) {
       }
       lexer->advance(lexer, false);
 
+      int paren_open = 1;
       // Checking closure.
-      while (lexer->lookahead != ')') {
+      while (true) {
         if (is_newline(lexer->lookahead)) {
           return false;
+        }
+
+        if (lexer->lookahead == '(') {
+          paren_open++;
+        } else if (lexer->lookahead == ')') {
+          paren_open--;
+          if (paren_open == 0) {
+            break;
+          }
         }
         lexer->advance(lexer, false);
       }
