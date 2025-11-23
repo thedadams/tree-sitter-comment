@@ -16,8 +16,7 @@
 /// - TODO(thedadams):
 /// - TODO(thedadams): text
 /// - TODO (thedadams) : text
-static bool parse_tagname(TSLexer* lexer, const bool* valid_symbols)
-{
+static bool parse_tagname(TSLexer* lexer) {
   while (is_possible_start_of_tag(lexer->lookahead)) {
     lexer->advance(lexer, false);
   }
@@ -45,41 +44,70 @@ static bool parse_tagname(TSLexer* lexer, const bool* valid_symbols)
   }
 
   // For the user component this is `\s*(`.
-  // We don't parse that part, we just need to be sure it ends with `:\s`.
-  if ((is_space(lexer->lookahead) && !is_newline(lexer->lookahead))
-      || lexer->lookahead == '(') {
-    // Skip white spaces.
-    while (is_space(lexer->lookahead) && !is_newline(lexer->lookahead)) {
-      lexer->advance(lexer, false);
-    }
-    // Checking aperture.
-    if (lexer->lookahead != '(') {
-      lexer->result_symbol = T_TAGNAME;
-      return true;
-    }
-    lexer->advance(lexer, false);
-
-    // Checking closure.
-    while (lexer->lookahead != ')') {
-      if (is_newline(lexer->lookahead)) {
-        return false;
+    // We don't parse that part, we just need to be sure it ends with `:\s`.
+    if ((is_space(lexer->lookahead) && !is_newline(lexer->lookahead))
+        || lexer->lookahead == '(') {
+      // Skip white spaces.
+      while (is_space(lexer->lookahead) && !is_newline(lexer->lookahead)) {
+        lexer->advance(lexer, false);
+      }
+      // Checking aperture.
+      if (lexer->lookahead != '(') {
+        lexer->result_symbol = T_TAGNAME;
+        return true;
       }
       lexer->advance(lexer, false);
+
+      // Checking closure.
+      while (lexer->lookahead != ')') {
+        if (is_newline(lexer->lookahead)) {
+          return false;
+        }
+        lexer->advance(lexer, false);
+      }
     }
-  }
 
   lexer->result_symbol = T_TAGNAME;
   return true;
 }
 
-static bool parse_tagtext(TSLexer* lexer, const bool* valid_symbols) {
+static bool parse_taguser(TSLexer* lexer) {
+  int paren_open = 1;
+  while (true) {
+    if (is_newline(lexer->lookahead)) {
+      return false;
+    }
+
+    if (lexer->lookahead == '(') {
+      paren_open++;
+    } else if (lexer->lookahead == ')') {
+      paren_open--;
+      if (paren_open == 0) {
+        lexer->result_symbol = T_TAGUSER;
+        return true;
+      }
+    }
+    lexer->advance(lexer, false);
+  }
+}
+
+static bool parse_tagtext(TSLexer* lexer) {
+  while (is_space(lexer->lookahead) && !is_newline(lexer->lookahead)) {
+    lexer->advance(lexer, false);
+  }
+
+  if (lexer->lookahead == '(') {
+    return false;
+  }
+
   bool has_text = false;
   while (!is_eof(lexer->lookahead)) {
     while(is_possible_start_of_tag(lexer->lookahead)) {
+      has_text = has_text || !is_space(lexer->lookahead);
       lexer->advance(lexer, false);
     }
 
-    if (is_newline(lexer->lookahead) || lexer->lookahead == '(') {
+    if (is_newline(lexer->lookahead) || !has_text && lexer->lookahead == '(') {
       if (!has_text) {
         return false;
       }
@@ -109,25 +137,26 @@ static bool parse_tagtext(TSLexer* lexer, const bool* valid_symbols) {
   return true;
 }
 
-static bool parse(TSLexer* lexer, const bool* valid_symbols)
-{
+static bool parse(TSLexer* lexer, const bool* valid_symbols) {
   // If all valid symbols are true, tree-sitter is in correction mode.
   // We don't want to parse anything in that case.
-  if (valid_symbols[T_INVALID_TOKEN] || lexer->get_column(lexer) != 0 && !valid_symbols[T_TAGTEXT]) {
+  if (valid_symbols[T_INVALID_TOKEN] || (lexer->get_column(lexer) != 0 && !valid_symbols[T_TAGTEXT] && !valid_symbols[T_TAGUSER])) {
     return false;
   }
 
   // Text is only valid if we are not on a new line. We would have parsed all of the text before this point.
   if (lexer->get_column(lexer) != 0) {
     if (valid_symbols[T_TAGTEXT] && lexer->lookahead != '(') {
-      return parse_tagtext(lexer, valid_symbols);
+      return parse_tagtext(lexer);
+    } else if (valid_symbols[T_TAGUSER]) {
+      return parse_taguser(lexer);
     }
 
     return false;
   }
 
   if (valid_symbols[T_TAGNAME] && (is_upper(lexer->lookahead) || is_possible_start_of_tag(lexer->lookahead))) {
-    return parse_tagname(lexer, valid_symbols);
+    return parse_tagname(lexer);
   }
 
   return false;
