@@ -12,7 +12,7 @@
 #define SYMBOL_COUNT 33
 #define ALIAS_COUNT 0
 #define TOKEN_COUNT 27
-#define EXTERNAL_TOKEN_COUNT 3
+#define EXTERNAL_TOKEN_COUNT 4
 #define FIELD_COUNT 0
 #define MAX_ALIAS_SEQUENCE_LENGTH 3
 #define MAX_RESERVED_WORD_SET_SIZE 0
@@ -21,29 +21,29 @@
 
 enum ts_symbol_identifiers {
   anon_sym_LPAREN = 1,
-  aux_sym__user_token1 = 2,
-  anon_sym_RPAREN = 3,
-  sym__newline = 4,
-  aux_sym__text_token1 = 5,
-  anon_sym_SLASH = 6,
-  anon_sym_SQUOTE = 7,
-  anon_sym_DQUOTE = 8,
-  anon_sym_BQUOTE = 9,
-  anon_sym_LT = 10,
-  anon_sym_LBRACK = 11,
-  anon_sym_LBRACE = 12,
-  anon_sym_DOT = 13,
-  anon_sym_COMMA = 14,
-  anon_sym_COLON = 15,
-  anon_sym_SEMI = 16,
-  anon_sym_BANG = 17,
-  anon_sym_QMARK = 18,
-  anon_sym_BSLASH = 19,
-  anon_sym_RBRACE = 20,
-  anon_sym_RBRACK = 21,
-  anon_sym_GT = 22,
-  anon_sym_DASH = 23,
-  sym_name = 24,
+  anon_sym_RPAREN = 2,
+  sym__newline = 3,
+  aux_sym__text_token1 = 4,
+  anon_sym_SLASH = 5,
+  anon_sym_SQUOTE = 6,
+  anon_sym_DQUOTE = 7,
+  anon_sym_BQUOTE = 8,
+  anon_sym_LT = 9,
+  anon_sym_LBRACK = 10,
+  anon_sym_LBRACE = 11,
+  anon_sym_DOT = 12,
+  anon_sym_COMMA = 13,
+  anon_sym_COLON = 14,
+  anon_sym_SEMI = 15,
+  anon_sym_BANG = 16,
+  anon_sym_QMARK = 17,
+  anon_sym_BSLASH = 18,
+  anon_sym_RBRACE = 19,
+  anon_sym_RBRACK = 20,
+  anon_sym_GT = 21,
+  anon_sym_DASH = 22,
+  sym_name = 23,
+  sym_user = 24,
   sym_text = 25,
   sym_invalid_token = 26,
   sym_source = 27,
@@ -57,7 +57,6 @@ enum ts_symbol_identifiers {
 static const char * const ts_symbol_names[] = {
   [ts_builtin_sym_end] = "end",
   [anon_sym_LPAREN] = "(",
-  [aux_sym__user_token1] = "user",
   [anon_sym_RPAREN] = ")",
   [sym__newline] = "_newline",
   [aux_sym__text_token1] = "_text_token1",
@@ -80,6 +79,7 @@ static const char * const ts_symbol_names[] = {
   [anon_sym_GT] = ">",
   [anon_sym_DASH] = "-",
   [sym_name] = "name",
+  [sym_user] = "user",
   [sym_text] = "text",
   [sym_invalid_token] = "invalid_token",
   [sym_source] = "source",
@@ -93,7 +93,6 @@ static const char * const ts_symbol_names[] = {
 static const TSSymbol ts_symbol_map[] = {
   [ts_builtin_sym_end] = ts_builtin_sym_end,
   [anon_sym_LPAREN] = anon_sym_LPAREN,
-  [aux_sym__user_token1] = aux_sym__user_token1,
   [anon_sym_RPAREN] = anon_sym_RPAREN,
   [sym__newline] = sym__newline,
   [aux_sym__text_token1] = aux_sym__text_token1,
@@ -116,6 +115,7 @@ static const TSSymbol ts_symbol_map[] = {
   [anon_sym_GT] = anon_sym_GT,
   [anon_sym_DASH] = anon_sym_DASH,
   [sym_name] = sym_name,
+  [sym_user] = sym_user,
   [sym_text] = sym_text,
   [sym_invalid_token] = sym_invalid_token,
   [sym_source] = sym_source,
@@ -134,10 +134,6 @@ static const TSSymbolMetadata ts_symbol_metadata[] = {
   [anon_sym_LPAREN] = {
     .visible = true,
     .named = false,
-  },
-  [aux_sym__user_token1] = {
-    .visible = true,
-    .named = true,
   },
   [anon_sym_RPAREN] = {
     .visible = true,
@@ -227,6 +223,10 @@ static const TSSymbolMetadata ts_symbol_metadata[] = {
     .visible = true,
     .named = true,
   },
+  [sym_user] = {
+    .visible = true,
+    .named = true,
+  },
   [sym_text] = {
     .visible = true,
     .named = true,
@@ -297,61 +297,61 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
     case 0:
       if (eof) ADVANCE(2);
       ADVANCE_MAP(
-        '\n', 7,
+        '\n', 5,
         '\r', 1,
-        '!', 20,
-        '"', 11,
-        '\'', 10,
+        '!', 18,
+        '"', 9,
+        '\'', 8,
         '(', 3,
-        ')', 6,
-        ',', 17,
-        '-', 26,
-        '.', 16,
-        '/', 9,
-        ':', 18,
-        ';', 19,
-        '<', 13,
-        '>', 25,
-        '?', 21,
-        '[', 14,
-        '\\', 22,
-        ']', 24,
-        '`', 12,
-        '{', 15,
-        '}', 23,
+        ')', 4,
+        ',', 15,
+        '-', 24,
+        '.', 14,
+        '/', 7,
+        ':', 16,
+        ';', 17,
+        '<', 11,
+        '>', 23,
+        '?', 19,
+        '[', 12,
+        '\\', 20,
+        ']', 22,
+        '`', 10,
+        '{', 13,
+        '}', 21,
       );
       if (('\t' <= lookahead && lookahead <= '\f') ||
           lookahead == ' ') SKIP(0);
-      if (lookahead != 0) ADVANCE(8);
+      if (lookahead != 0) ADVANCE(6);
       END_STATE();
     case 1:
       ADVANCE_MAP(
-        '\n', 7,
+        '\n', 5,
         '\r', 1,
-        '!', 20,
-        '"', 11,
-        '\'', 10,
+        '!', 18,
+        '"', 9,
+        '\'', 8,
         '(', 3,
-        ')', 6,
-        ',', 17,
-        '-', 26,
-        '.', 16,
-        '/', 9,
-        ':', 18,
-        ';', 19,
-        '<', 13,
-        '>', 25,
-        '?', 21,
-        '[', 14,
-        '\\', 22,
-        ']', 24,
-        '`', 12,
-        '{', 15,
-        '}', 23,
+        ')', 4,
+        ',', 15,
+        '-', 24,
+        '.', 14,
+        '/', 7,
+        ':', 16,
+        ';', 17,
+        '<', 11,
+        '>', 23,
+        '?', 19,
+        '[', 12,
+        '\\', 20,
+        ']', 22,
+        '`', 10,
+        '{', 13,
+        '}', 21,
       );
       if (('\t' <= lookahead && lookahead <= '\f') ||
           lookahead == ' ') SKIP(1);
-      if (lookahead != 0) ADVANCE(8);
+      if (lookahead != 0) ADVANCE(6);
       END_STATE();
     case 2:
       ACCEPT_TOKEN(ts_builtin_sym_end);
@@ -360,85 +360,69 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       ACCEPT_TOKEN(anon_sym_LPAREN);
       END_STATE();
     case 4:
-      ACCEPT_TOKEN(aux_sym__user_token1);
-      if (lookahead == '\n') ADVANCE(4);
-      if (lookahead == '\r') ADVANCE(4);
-      if (('\t' <= lookahead && lookahead <= '\f') ||
-          lookahead == ' ') ADVANCE(4);
-      if (lookahead != 0 &&
-          lookahead != '(' &&
-          lookahead != ')') ADVANCE(5);
-      END_STATE();
-    case 5:
-      ACCEPT_TOKEN(aux_sym__user_token1);
-      if (lookahead != 0 &&
-          lookahead != '(' &&
-          lookahead != ')') ADVANCE(5);
-      END_STATE();
-    case 6:
       ACCEPT_TOKEN(anon_sym_RPAREN);
       END_STATE();
-    case 7:
+    case 5:
       ACCEPT_TOKEN(sym__newline);
-      if (lookahead == '\n') ADVANCE(7);
+      if (lookahead == '\n') ADVANCE(5);
       if (lookahead == '\r') ADVANCE(1);
       END_STATE();
-    case 8:
+    case 6:
       ACCEPT_TOKEN(aux_sym__text_token1);
-      if ((!eof && set_contains(aux_sym__text_token1_character_set_1, 11, lookahead))) ADVANCE(8);
+      if ((!eof && set_contains(aux_sym__text_token1_character_set_1, 11, lookahead))) ADVANCE(6);
       END_STATE();
-    case 9:
+    case 7:
       ACCEPT_TOKEN(anon_sym_SLASH);
       END_STATE();
-    case 10:
+    case 8:
       ACCEPT_TOKEN(anon_sym_SQUOTE);
       END_STATE();
-    case 11:
+    case 9:
       ACCEPT_TOKEN(anon_sym_DQUOTE);
       END_STATE();
-    case 12:
+    case 10:
       ACCEPT_TOKEN(anon_sym_BQUOTE);
       END_STATE();
-    case 13:
+    case 11:
       ACCEPT_TOKEN(anon_sym_LT);
       END_STATE();
-    case 14:
+    case 12:
       ACCEPT_TOKEN(anon_sym_LBRACK);
       END_STATE();
-    case 15:
+    case 13:
       ACCEPT_TOKEN(anon_sym_LBRACE);
       END_STATE();
-    case 16:
+    case 14:
       ACCEPT_TOKEN(anon_sym_DOT);
       END_STATE();
-    case 17:
+    case 15:
       ACCEPT_TOKEN(anon_sym_COMMA);
       END_STATE();
-    case 18:
+    case 16:
       ACCEPT_TOKEN(anon_sym_COLON);
       END_STATE();
-    case 19:
+    case 17:
       ACCEPT_TOKEN(anon_sym_SEMI);
       END_STATE();
-    case 20:
+    case 18:
       ACCEPT_TOKEN(anon_sym_BANG);
       END_STATE();
-    case 21:
+    case 19:
       ACCEPT_TOKEN(anon_sym_QMARK);
       END_STATE();
-    case 22:
+    case 20:
       ACCEPT_TOKEN(anon_sym_BSLASH);
       END_STATE();
-    case 23:
+    case 21:
       ACCEPT_TOKEN(anon_sym_RBRACE);
       END_STATE();
-    case 24:
+    case 22:
       ACCEPT_TOKEN(anon_sym_RBRACK);
       END_STATE();
-    case 25:
+    case 23:
       ACCEPT_TOKEN(anon_sym_GT);
       END_STATE();
-    case 26:
+    case 24:
       ACCEPT_TOKEN(anon_sym_DASH);
       END_STATE();
     default:
@@ -458,7 +442,7 @@ static const TSLexerMode ts_lex_modes[STATE_COUNT] = {
   [8] = {.lex_state = 0, .external_lex_state = 2},
   [9] = {.lex_state = 0, .external_lex_state = 2},
   [10] = {.lex_state = 0},
-  [11] = {.lex_state = 4},
+  [11] = {.lex_state = 0, .external_lex_state = 4},
   [12] = {.lex_state = 0},
 };
 
@@ -488,6 +472,7 @@ static const uint16_t ts_parse_table[LARGE_STATE_COUNT][SYMBOL_COUNT] = {
     [anon_sym_GT] = ACTIONS(1),
     [anon_sym_DASH] = ACTIONS(1),
     [sym_name] = ACTIONS(1),
+    [sym_user] = ACTIONS(1),
     [sym_text] = ACTIONS(1),
     [sym_invalid_token] = ACTIONS(1),
   },
@@ -751,14 +736,14 @@ static const uint16_t ts_small_parse_table[] = {
     ACTIONS(47), 1,
       ts_builtin_sym_end,
   [7] = 2,
-    ACTIONS(49), 1,
-      aux_sym__user_token1,
-    ACTIONS(51), 1,
+    ACTIONS(3), 1,
       sym__newline,
+    ACTIONS(49), 1,
+      sym_user,
   [14] = 2,
     ACTIONS(3), 1,
       sym__newline,
-    ACTIONS(53), 1,
+    ACTIONS(51), 1,
       anon_sym_RPAREN,
 };
 
@@ -793,26 +778,28 @@ static const TSParseActionEntry ts_parse_actions[] = {
   [43] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_tag, 3, 0, 0),
   [45] = {.entry = {.count = 1, .reusable = false}}, REDUCE(sym_tag, 3, 0, 0),
   [47] = {.entry = {.count = 1, .reusable = true}},  ACCEPT_INPUT(),
-  [49] = {.entry = {.count = 1, .reusable = false}}, SHIFT(12),
-  [51] = {.entry = {.count = 1, .reusable = false}}, SHIFT_EXTRA(),
-  [53] = {.entry = {.count = 1, .reusable = false}}, SHIFT(6),
+  [49] = {.entry = {.count = 1, .reusable = true}}, SHIFT(12),
+  [51] = {.entry = {.count = 1, .reusable = false}}, SHIFT(6),
 };
 
 enum ts_external_scanner_symbol_identifiers {
   ts_external_token_name = 0,
-  ts_external_token_text = 1,
-  ts_external_token_invalid_token = 2,
+  ts_external_token_user = 1,
+  ts_external_token_text = 2,
+  ts_external_token_invalid_token = 3,
 };
 
 static const TSSymbol ts_external_scanner_symbol_map[EXTERNAL_TOKEN_COUNT] = {
   [ts_external_token_name] = sym_name,
+  [ts_external_token_user] = sym_user,
   [ts_external_token_text] = sym_text,
   [ts_external_token_invalid_token] = sym_invalid_token,
 };
 
-static const bool ts_external_scanner_states[4][EXTERNAL_TOKEN_COUNT] = {
+static const bool ts_external_scanner_states[5][EXTERNAL_TOKEN_COUNT] = {
   [1] = {
     [ts_external_token_name] = true,
+    [ts_external_token_user] = true,
     [ts_external_token_text] = true,
     [ts_external_token_invalid_token] = true,
   },
@@ -822,6 +809,9 @@ static const bool ts_external_scanner_states[4][EXTERNAL_TOKEN_COUNT] = {
   [3] = {
     [ts_external_token_name] = true,
     [ts_external_token_text] = true,
+  },
+  [4] = {
+    [ts_external_token_user] = true,
   },
 };
 

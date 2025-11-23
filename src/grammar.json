@@ -68,13 +68,8 @@
           "value": "("
         },
         {
-          "type": "ALIAS",
-          "content": {
-            "type": "PATTERN",
-            "value": "[^()]*"
-          },
-          "named": true,
-          "value": "user"
+          "type": "SYMBOL",
+          "name": "user"
         },
         {
           "type": "STRING",
@@ -201,6 +196,10 @@
     {
       "type": "SYMBOL",
       "name": "name"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "user"
     },
     {
       "type": "SYMBOL",

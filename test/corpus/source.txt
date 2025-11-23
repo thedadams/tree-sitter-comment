@@ -449,9 +449,24 @@ DOPE:
  * NOTE: This is a note that starts with a space
  * FIXME: This is still part of the NOTE
 
+//TODO: * (e^(-i 2*pi)^(1/N kn))
+
+// HACK: * e()
+
+//FIX: (e^())
+
 --------------------------------------------------------------------------------
 
 (source
+  (tag
+    (name)
+    (text))
+  (tag
+    (name)
+    (text))
+  (tag
+    (name)
+    (text))
   (tag
     (name)
     (text))
@@ -511,6 +526,12 @@ DOPE
  * NOTE This is a note that starts with a space
  * FIXME This is still part of the NOTE
 
+//TODO * (e^(-i 2*pi)^(1/N kn))
+
+// HACK * e()
+
+//FIX (e^())
+
 --------------------------------------------------------------------------------
 
 (source
@@ -539,4 +560,13 @@ DOPE
     (text))
   (tag
     (name)
-    (text)))
+    (text))
+  (tag
+    (name)
+    (text))
+  (tag
+    (name)
+    (text))
+  (tag
+    (name)
+    (user)))
