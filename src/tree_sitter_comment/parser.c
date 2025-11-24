@@ -44,38 +44,38 @@ static bool parse_tagname(TSLexer* lexer) {
   }
 
   // For the user component this is `\s*(`.
-    // We don't parse that part, we just need to be sure it ends with `:\s`.
-    if ((is_space(lexer->lookahead) && !is_newline(lexer->lookahead))
-        || lexer->lookahead == '(') {
-      // Skip white spaces.
-      while (is_space(lexer->lookahead) && !is_newline(lexer->lookahead)) {
-        lexer->advance(lexer, false);
+  // We don't parse that part, we just need to be sure it ends with `:\s`.
+  if ((is_space(lexer->lookahead) && !is_newline(lexer->lookahead))
+      || lexer->lookahead == '(') {
+    // Skip white spaces.
+    while (is_space(lexer->lookahead) && !is_newline(lexer->lookahead)) {
+      lexer->advance(lexer, false);
+    }
+    // Checking aperture.
+    if (lexer->lookahead != '(') {
+      lexer->result_symbol = T_TAGNAME;
+      return true;
+    }
+    lexer->advance(lexer, false);
+
+    int paren_open = 1;
+    // Checking closure.
+    while (true) {
+      if (is_newline(lexer->lookahead)) {
+        return false;
       }
-      // Checking aperture.
-      if (lexer->lookahead != '(') {
-        lexer->result_symbol = T_TAGNAME;
-        return true;
+
+      if (lexer->lookahead == '(') {
+        paren_open++;
+      } else if (lexer->lookahead == ')') {
+        paren_open--;
+        if (paren_open == 0) {
+          break;
+        }
       }
       lexer->advance(lexer, false);
-
-      int paren_open = 1;
-      // Checking closure.
-      while (true) {
-        if (is_newline(lexer->lookahead)) {
-          return false;
-        }
-
-        if (lexer->lookahead == '(') {
-          paren_open++;
-        } else if (lexer->lookahead == ')') {
-          paren_open--;
-          if (paren_open == 0) {
-            break;
-          }
-        }
-        lexer->advance(lexer, false);
-      }
     }
+  }
 
   lexer->result_symbol = T_TAGNAME;
   return true;
