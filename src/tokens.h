@@ -2,6 +2,7 @@
 #define TREE_SITTER_COMMENT_TOKENS_H
 
 enum TokenType {
+  T_TAGPREFIX,
   T_TAGNAME,
   T_TAGUSER,
   T_TAGTEXT,
