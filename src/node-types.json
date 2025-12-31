@@ -28,6 +28,10 @@
           "named": true
         },
         {
+          "type": "prefix",
+          "named": true
+        },
+        {
           "type": "text",
           "named": true
         },
@@ -117,6 +121,10 @@
   },
   {
     "type": "name",
+    "named": true
+  },
+  {
+    "type": "prefix",
     "named": true
   },
   {
