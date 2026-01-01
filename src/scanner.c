@@ -19,14 +19,14 @@
 /// TODO(thedadams): text
 /// TODO (thedadams) : text
 static bool parse_tagname(TSLexer *lexer, bool mark) {
-    if (!is_upper(lexer->lookahead)) {
+    if (!is_upper(lexer->lookahead) && !is_special_tag(lexer->lookahead)) {
         return false;
     }
 
     int32_t previous = lexer->lookahead;
     lexer->advance(lexer, false);
 
-    while (is_upper(lexer->lookahead) || is_digit(lexer->lookahead) || is_internal_char(lexer->lookahead)) {
+    while (is_upper(lexer->lookahead) || is_digit(lexer->lookahead) || is_internal_char(lexer->lookahead) || is_special_tag(lexer->lookahead)) {
         previous = lexer->lookahead;
         lexer->advance(lexer, false);
     }
