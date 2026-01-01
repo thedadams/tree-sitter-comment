@@ -27,6 +27,7 @@ const STOP_CHARS = [
   "]",
   ")",
   ">",
+  "\n",
   // This must be last, so that it isn't interpreted as a range.
   "-",
 ];
@@ -34,26 +35,36 @@ const STOP_CHARS = [
 module.exports = grammar({
   name: "comment",
 
-  externals: ($) => [$.prefix, $.name, $.user, $.text, $.invalid_token],
+  externals: ($) => [
+    $.prefix,
+    $.name,
+    $.user,
+    $.text,
+    $._break,
+    $.invalid_token,
+  ],
 
-  extras: ($) => [$._newline, /\s/],
+  extras: ($) => [/\s/],
 
   rules: {
     source: ($) => repeat(choice($.tag, alias($._text, "text"))),
 
     tag: ($) =>
       prec.right(
-        seq(optional($.prefix), $.name, optional($._user), optional($.text)),
+        seq(
+          optional($.prefix),
+          $.name,
+          optional($._user),
+          optional(repeat(choice($.prefix, $.text))),
+          optional($._break),
+        ),
       ),
 
     _user: ($) => seq("(", $.user, ")"),
 
-    // HACK: for some reason this needs be assigned to a token, otherwise isn't recognized as an extra.
-    _newline: ($) => /\r?\n/,
-
     // Text tokens can be a single character, or a sequence of characters that aren't stop characters.
     _text: ($) => choice($._stop_char, notmatching(STOP_CHARS)),
-    _stop_char: ($) => choice(...STOP_CHARS),
+    _stop_char: () => choice(...STOP_CHARS),
   },
 });
 
