@@ -6,6 +6,7 @@ enum TokenType {
   T_TAGNAME,
   T_TAGUSER,
   T_TAGTEXT,
+  T_TAGBREAK,
   T_INVALID_TOKEN,
 };
 

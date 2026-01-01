@@ -80,7 +80,7 @@ static bool parse_tagname(TSLexer *lexer, bool mark) {
     return true;
 }
 
-static bool parse_tagprefix(TSLexer *lexer) {
+static bool parse_tagprefix(TSLexer *lexer, bool next_is_tag_name) {
     while (is_space(lexer->lookahead)) {
         lexer->advance(lexer, false);
     }
@@ -99,7 +99,7 @@ static bool parse_tagprefix(TSLexer *lexer) {
 
     lexer->mark_end(lexer);
 
-    if (is_newline(lexer->lookahead) || lexer->eof(lexer) || !parse_tagname(lexer, false)) {
+    if (is_newline(lexer->lookahead) || lexer->eof(lexer) || next_is_tag_name && !parse_tagname(lexer, false)) {
         return false;
     }
 
@@ -110,7 +110,7 @@ static bool parse_tagprefix(TSLexer *lexer) {
 static bool parse_taguser(TSLexer *lexer) {
     int paren_open = 1;
     while (true) {
-        if (is_newline(lexer->lookahead)) {
+        if (is_newline(lexer->lookahead) || lexer->eof(lexer)) {
             return false;
         }
 
@@ -132,43 +132,19 @@ static bool parse_tagtext(TSLexer *lexer) {
         lexer->advance(lexer, false);
     }
 
-    if (lexer->lookahead == '(') {
+    if (lexer->lookahead == '(' || is_newline(lexer->lookahead) || lexer->eof(lexer)) {
         return false;
     }
 
-    bool has_text = false;
     while (!lexer->eof(lexer)) {
-        while (is_possible_start_of_tag(lexer->lookahead) || is_space(lexer->lookahead)) {
-            has_text = has_text || !is_space(lexer->lookahead);
+        lexer->advance(lexer, false);
+        if (is_newline(lexer->lookahead)) {
             lexer->advance(lexer, false);
-        }
-
-        if (is_newline(lexer->lookahead) || lexer->eof(lexer) || !has_text && lexer->lookahead == '(') {
-            if (!has_text) {
-                return false;
-            }
-
-            lexer->result_symbol = T_TAGTEXT;
-            return true;
-        }
-
-        has_text = true;
-
-        while (!is_newline(lexer->lookahead) && !lexer->eof(lexer)) {
-            lexer->advance(lexer, false);
-        }
-
-        lexer->mark_end(lexer);
-
-        if (!lexer->eof(lexer)) {
-            lexer->advance(lexer, false);
+            break;
         }
     }
 
-    if (!has_text) {
-        return false;
-    }
-
+    lexer->mark_end(lexer);
     lexer->result_symbol = T_TAGTEXT;
     return true;
 }
@@ -188,15 +164,27 @@ bool tree_sitter_comment_external_scanner_scan(void *payload, TSLexer *lexer, co
         return false;
     }
 
+    if (valid_symbols[T_TAGBREAK] && lexer->get_column(lexer) == 0 && is_newline(lexer->lookahead)) {
+        lexer->advance(lexer, false);
+        lexer->result_symbol = T_TAGBREAK;
+        return true;
+    }
+
     if (lexer->get_column(lexer) != 0) {
-        if (valid_symbols[T_TAGTEXT]) {
-            return parse_tagtext(lexer);
-        } else if (valid_symbols[T_TAGUSER]) {
+        if (valid_symbols[T_TAGUSER]) {
             return parse_taguser(lexer);
+        } else if (valid_symbols[T_TAGTEXT] && lexer->lookahead != '(') {
+            return parse_tagtext(lexer);
         }
-    } else if (valid_symbols[T_TAGPREFIX] && (is_possible_start_of_tag(lexer->lookahead)) ||
-               is_space(lexer->lookahead)) {
-        return parse_tagprefix(lexer);
+    }
+
+    if (lexer->get_column(lexer) == 0 && valid_symbols[T_TAGPREFIX] && (is_possible_start_of_tag(lexer->lookahead)) ||
+        is_space(lexer->lookahead)) {
+        if (parse_tagprefix(lexer, !valid_symbols[T_TAGBREAK])) {
+            return true;
+        } else if (valid_symbols[T_TAGTEXT]) {
+            return parse_tagtext(lexer);
+        }
     }
 
     // Tag names are only valid if they are at the beginning of the line or after a tag prefix.
