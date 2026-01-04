@@ -18,6 +18,18 @@ NOTE:
 
 DEBUG: thís shoúld wórk with $weird$ symbols
 
+// *: This is a special tag
+
+// !: This is another special tag
+
+// #: This is another special tag
+
+?: So is this
+
+// ?: And with a prefix
+
+// //: This is a different special tag
+
 --------------------------------------------------------------------------------
 
 (source
@@ -37,6 +49,29 @@ DEBUG: thís shoúld wórk with $weird$ symbols
     (name)
     (text))
   (tag
+    (name)
+    (text))
+  (tag
+    (prefix)
+    (name)
+    (text))
+  (tag
+    (prefix)
+    (name)
+    (text))
+  (tag
+    (prefix)
+    (name)
+    (text))
+  (tag
+    (name)
+    (text))
+  (tag
+    (prefix)
+    (name)
+    (text))
+  (tag
+    (prefix)
     (name)
     (text)))
 
@@ -60,6 +95,18 @@ NOTE
 
 DEBUG thís shoúld wórk with $weird$ symbols
 
+// * This is a special tag
+
+// # This is a special tag
+
+// ! This is another special tag
+
+? So is this
+
+// ? And with a prefix
+
+// // This is a different special tag
+
 --------------------------------------------------------------------------------
 
 (source
@@ -75,6 +122,29 @@ DEBUG thís shoúld wórk with $weird$ symbols
   (tag
     (name))
   (tag
+    (name)
+    (text))
+  (tag
+    (prefix)
+    (name)
+    (text))
+  (tag
+    (prefix)
+    (name)
+    (text))
+  (tag
+    (prefix)
+    (name)
+    (text))
+  (tag
+    (name)
+    (text))
+  (tag
+    (prefix)
+    (name)
+    (text))
+  (tag
+    (prefix)
     (name)
     (text)))
 
@@ -100,6 +170,18 @@ FIXME(): This is a valid tag even though the user is missing
 
 HACK(user: not a valid tag because of the missing parentheses
 
+// *(user): This is a special tag
+
+// !(thedadams): This is another special tag
+
+// #(thedadams): This is another special tag
+
+?(another): So is this
+
+// ?(thedadams): And with a prefix
+
+// //(thedadams): This is a different special tag
+
 --------------------------------------------------------------------------------
 
 (source
@@ -124,6 +206,35 @@ HACK(user: not a valid tag because of the missing parentheses
     (user)
     (text))
   (tag
+    (name)
+    (user)
+    (text))
+  (tag
+    (prefix)
+    (name)
+    (user)
+    (text))
+  (tag
+    (prefix)
+    (name)
+    (user)
+    (text))
+  (tag
+    (prefix)
+    (name)
+    (user)
+    (text))
+  (tag
+    (name)
+    (user)
+    (text))
+  (tag
+    (prefix)
+    (name)
+    (user)
+    (text))
+  (tag
+    (prefix)
     (name)
     (user)
     (text)))
@@ -148,6 +259,18 @@ NOTE(a user)
 
 FIXME() This is a valid tag even though the user is missing
 
+// *(user) This is a special tag
+
+// !(thedadams) This is another special tag
+
+// #(thedadams) This is another special tag
+
+?(another) So is this
+
+// ?(thedadams) And with a prefix
+
+// //(thedadams) This is a different special tag
+
 --------------------------------------------------------------------------------
 
 (source
@@ -171,6 +294,35 @@ FIXME() This is a valid tag even though the user is missing
     (name)
     (user))
   (tag
+    (name)
+    (user)
+    (text))
+  (tag
+    (prefix)
+    (name)
+    (user)
+    (text))
+  (tag
+    (prefix)
+    (name)
+    (user)
+    (text))
+  (tag
+    (prefix)
+    (name)
+    (user)
+    (text))
+  (tag
+    (name)
+    (user)
+    (text))
+  (tag
+    (prefix)
+    (name)
+    (user)
+    (text))
+  (tag
+    (prefix)
     (name)
     (user)
     (text)))
@@ -326,6 +478,9 @@ DOPE:
     (name)
     (text))
   (tag
+    (prefix)
+    (name))
+  (tag
     (name)
     (text))
   (tag
@@ -403,6 +558,9 @@ DOPE
   (tag
     (name)
     (text))
+  (tag
+    (prefix)
+    (name))
   (tag
     (name)
     (text))
@@ -489,6 +647,9 @@ DOPE:
     (prefix)
     (name)
     (text))
+  (tag
+    (prefix)
+    (name))
   (tag
     (name)
     (text))
@@ -584,6 +745,9 @@ DOPE
     (prefix)
     (name)
     (text))
+  (tag
+    (prefix)
+    (name))
   (tag
     (name)
     (text))

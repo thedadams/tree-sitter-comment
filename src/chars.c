@@ -1,5 +1,22 @@
 #include "chars.h"
 
+static bool is_special_tag(int32_t c) {
+    const int32_t special_chars[] = {
+        CHAR_EXCLAMATION_STAR,
+        CHAR_EXCLAMATION_MARK,
+        CHAR_QUESTION_MARK,
+        CHAR_HASH,
+        CHAR_FORWARD_SLASH,
+    };
+    const int length = sizeof(special_chars) / sizeof(int32_t);
+    for (int i = 0; i < length; i++) {
+        if (c == special_chars[i]) {
+            return true;
+        }
+    }
+    return false;
+}
+
 static bool is_upper(int32_t c) {
     const int32_t upper = 65;
     const int32_t lower = 90;

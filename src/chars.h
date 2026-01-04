@@ -13,11 +13,18 @@
 #define CHAR_TAB '\t'
 #define CHAR_VERTICAL_TAB '\v'
 
+#define CHAR_EXCLAMATION_STAR '*'
+#define CHAR_EXCLAMATION_MARK '!'
+#define CHAR_QUESTION_MARK '?'
+#define CHAR_HASH '#'
+#define CHAR_FORWARD_SLASH '/'
+
 static bool is_possible_start_of_tag(int32_t c);
 static bool is_internal_char(int32_t c);
 static bool is_newline(int32_t c);
 static bool is_space(int32_t c);
 static bool is_space_or_newline(int32_t c);
+static bool is_special_tag(int32_t c);
 static bool is_upper(int32_t c);
 static bool is_lower(int32_t c);
 static bool is_alpha(int32_t c);
