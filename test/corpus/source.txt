@@ -361,6 +361,8 @@ Not parsed because of beginning "
 (source
   (tag
     (name)
+    (text)
+    (text)
     (text))
   (tag
     (name)
@@ -368,18 +370,21 @@ Not parsed because of beginning "
   (tag
     (name)
     (user)
+    (text)
+    (text))
+  (tag
+    (name)
+    (text)
+    (text)
     (text))
   (tag
     (name)
     (text))
   (tag
     (name)
-    (text))
-  (tag
-    (name)
-    (text))
-  (tag
-    (name)
+    (text)
+    (text)
+    (text)
     (text)))
 
 ================================================================================
@@ -419,6 +424,8 @@ Not parsed because of beginning "
 (source
   (tag
     (name)
+    (text)
+    (text)
     (text))
   (tag
     (name)
@@ -426,18 +433,21 @@ Not parsed because of beginning "
   (tag
     (name)
     (user)
+    (text)
+    (text))
+  (tag
+    (name)
+    (text)
+    (text)
     (text))
   (tag
     (name)
     (text))
   (tag
     (name)
-    (text))
-  (tag
-    (name)
-    (text))
-  (tag
-    (name)
+    (text)
+    (text)
+    (text)
     (text)))
 
 ================================================================================
@@ -476,12 +486,10 @@ DOPE:
 (source
   (tag
     (name)
-    (text))
-  (tag
+    (text)
+    (text)
     (prefix)
-    (name))
-  (tag
-    (name)
+    (text)
     (text))
   (tag
     (name)
@@ -493,6 +501,7 @@ DOPE:
     (text))
   (tag
     (name)
+    (text)
     (text))
   (tag
     (name)
@@ -557,12 +566,10 @@ DOPE
 (source
   (tag
     (name)
-    (text))
-  (tag
+    (text)
+    (text)
     (prefix)
-    (name))
-  (tag
-    (name)
+    (text)
     (text))
   (tag
     (name)
@@ -574,6 +581,7 @@ DOPE
     (text))
   (tag
     (name)
+    (text)
     (text))
   (tag
     (name)
@@ -609,6 +617,8 @@ Comment-type characters to start line
 This spans multi-line
 * /
 WARN: This is now a new group.
+
+// *
 
 *
 
@@ -646,13 +656,14 @@ DOPE:
   (tag
     (prefix)
     (name)
+    (text)
+    (text)
+    (prefix)
+    (text)
     (text))
   (tag
     (prefix)
     (name))
-  (tag
-    (name)
-    (text))
   (tag
     (name)
     (text)
@@ -665,6 +676,7 @@ DOPE:
   (tag
     (prefix)
     (name)
+    (text)
     (text))
   (tag
     (name)
@@ -710,6 +722,8 @@ This spans multi-line
 * /
 WARN This is now a new group.
 
+// *
+
 *
 
 NOTE First item
@@ -744,13 +758,14 @@ DOPE
   (tag
     (prefix)
     (name)
+    (text)
+    (text)
+    (prefix)
+    (text)
     (text))
   (tag
     (prefix)
     (name))
-  (tag
-    (name)
-    (text))
   (tag
     (name)
     (text)
@@ -763,6 +778,7 @@ DOPE
   (tag
     (prefix)
     (name)
+    (text)
     (text))
   (tag
     (name)
