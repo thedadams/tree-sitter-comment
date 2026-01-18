@@ -56,7 +56,7 @@ module.exports = grammar({
           $.name,
           optional($._user),
           optional(repeat(choice($.prefix, $.text))),
-          optional($._break),
+          $._break,
         ),
       ),
 

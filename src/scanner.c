@@ -26,7 +26,8 @@ static bool parse_tagname(TSLexer *lexer, bool mark) {
     int32_t previous = lexer->lookahead;
     lexer->advance(lexer, false);
 
-    while (is_upper(lexer->lookahead) || is_digit(lexer->lookahead) || is_internal_char(lexer->lookahead) || is_special_tag(lexer->lookahead)) {
+    while (is_upper(lexer->lookahead) || is_digit(lexer->lookahead) || is_internal_char(lexer->lookahead) ||
+           is_special_tag(lexer->lookahead)) {
         previous = lexer->lookahead;
         lexer->advance(lexer, false);
     }
@@ -164,7 +165,7 @@ bool tree_sitter_comment_external_scanner_scan(void *payload, TSLexer *lexer, co
         return false;
     }
 
-    if (valid_symbols[T_TAGBREAK] && lexer->get_column(lexer) == 0 && is_newline(lexer->lookahead)) {
+    if (valid_symbols[T_TAGBREAK] && (is_newline(lexer->lookahead) || lexer->eof(lexer))) {
         lexer->advance(lexer, false);
         lexer->result_symbol = T_TAGBREAK;
         return true;
@@ -180,17 +181,34 @@ bool tree_sitter_comment_external_scanner_scan(void *payload, TSLexer *lexer, co
 
     if (lexer->get_column(lexer) == 0 && valid_symbols[T_TAGPREFIX] && (is_possible_start_of_tag(lexer->lookahead)) ||
         is_space(lexer->lookahead)) {
+        bool special_tag = is_special_tag(lexer->lookahead);
         if (parse_tagprefix(lexer, !valid_symbols[T_TAGBREAK])) {
             return true;
-        } else if (valid_symbols[T_TAGTEXT]) {
-            return parse_tagtext(lexer);
+        } else if (valid_symbols[T_TAGTEXT] && parse_tagtext(lexer)) {
+            return true;
+        } else if (valid_symbols[T_TAGBREAK] && (is_newline(lexer->lookahead) || lexer->eof(lexer))) {
+            lexer->advance(lexer, false);
+            lexer->result_symbol = T_TAGBREAK;
+            return true;
         }
     }
 
     // Tag names are only valid if they are at the beginning of the line or after a tag prefix.
     // We know this is after a tag prefix if T_TAGPREFIX is not valid.
     if ((lexer->get_column(lexer) == 0 || !valid_symbols[T_TAGPREFIX]) && valid_symbols[T_TAGNAME]) {
-        return parse_tagname(lexer, true);
+        if (parse_tagname(lexer, true)) {
+            return true;
+        }
+    }
+
+    if (valid_symbols[T_TAGTEXT]) {
+        if (parse_tagtext(lexer)) {
+            return true;
+        }
+    } else if (valid_symbols[T_TAGBREAK] && (is_newline(lexer->lookahead) || lexer->eof(lexer))) {
+        lexer->advance(lexer, false);
+        lexer->result_symbol = T_TAGBREAK;
+        return true;
     }
 
     return false;
