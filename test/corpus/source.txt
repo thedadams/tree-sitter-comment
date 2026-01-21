@@ -24,6 +24,8 @@ DEBUG: thís shoúld wórk with $weird$ symbols
 
 // #: This is another special tag
 
+// #[debug]: This shouldn't work because of the brackets
+
 ?: So is this
 
 // ?: And with a prefix
@@ -98,6 +100,8 @@ DEBUG thís shoúld wórk with $weird$ symbols
 // * This is a special tag
 
 // # This is a special tag
+
+// #[debug] This shouldn't work because of the brackets
 
 // ! This is another special tag
 
@@ -176,6 +180,10 @@ HACK(user: not a valid tag because of the missing parentheses
 
 // #(thedadams): This is another special tag
 
+// #(thedadams)[debug]: This is another special tag
+
+// #[debug](thedadams): This shouldn't work because of the brackets
+
 ?(another): So is this
 
 // ?(thedadams): And with a prefix
@@ -206,6 +214,11 @@ HACK(user: not a valid tag because of the missing parentheses
     (user)
     (text))
   (tag
+    (name)
+    (user)
+    (text))
+  (tag
+    (prefix)
     (name)
     (user)
     (text))
@@ -265,6 +278,10 @@ FIXME() This is a valid tag even though the user is missing
 
 // #(thedadams) This is another special tag
 
+// #(thedadams)[debug] This is another special tag
+
+// #[debug](thedadams) This shouldn't work because of the brackets
+
 ?(another) So is this
 
 // ?(thedadams) And with a prefix
@@ -294,6 +311,11 @@ FIXME() This is a valid tag even though the user is missing
     (name)
     (user))
   (tag
+    (name)
+    (user)
+    (text))
+  (tag
+    (prefix)
     (name)
     (user)
     (text))

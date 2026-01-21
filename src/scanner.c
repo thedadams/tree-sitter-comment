@@ -38,7 +38,8 @@ static bool parse_tagname(TSLexer *lexer, bool mark) {
     }
 
     // It can't end with an internal char.
-    if (is_internal_char(previous) || is_alpha(lexer->lookahead)) {
+    if (is_internal_char(previous) || !is_space_or_newline(lexer->lookahead) && !lexer->eof(lexer) &&
+                                          lexer->lookahead != '(' && lexer->lookahead != ':') {
         return false;
     }
 
