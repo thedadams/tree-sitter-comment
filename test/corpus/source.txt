@@ -672,6 +672,10 @@ DOPE:
 
 //FIX: (e^())
 
+ % FIXME: Support comments like this
+
+ % FIXME(user): Support comments like this
+
 --------------------------------------------------------------------------------
 
 (source
@@ -733,6 +737,15 @@ DOPE:
   (tag
     (prefix)
     (name)
+    (text))
+  (tag
+    (prefix)
+    (name)
+    (text))
+  (tag
+    (prefix)
+    (name)
+    (user)
     (text)))
 
 ================================================================================
@@ -774,6 +787,10 @@ DOPE
 
 //FIX (e^())
 
+ % FIXME Support comments like this
+
+ % FIXME(user) Support comments like this
+
 --------------------------------------------------------------------------------
 
 (source
@@ -834,4 +851,13 @@ DOPE
   (tag
     (prefix)
     (name)
-    (user)))
+    (user))
+  (tag
+    (prefix)
+    (name)
+    (text))
+  (tag
+    (prefix)
+    (name)
+    (user)
+    (text)))
