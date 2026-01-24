@@ -83,7 +83,7 @@ static bool is_internal_char(int32_t c) {
 /// Check if the character is to start a new comment line.
 static bool is_possible_start_of_tag(int32_t c) {
     const int32_t valid_chars[] = {
-        '/', '#', '*', ';', '+', '-', '!', '|', '<', '[',
+        '/', '#', '*', ';', '+', '-', '!', '|', '<', '[', '%',
     };
     const int length = sizeof(valid_chars) / sizeof(int32_t);
     for (int i = 0; i < length; i++) {
