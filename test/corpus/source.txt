@@ -32,6 +32,8 @@ DEBUG: thís shoúld wórk with $weird$ symbols
 
 // //: This is a different special tag
 
+ TODO: starting with a space works
+
 --------------------------------------------------------------------------------
 
 (source
@@ -66,6 +68,10 @@ DEBUG: thís shoúld wórk with $weird$ symbols
     (name)
     (text))
   (tag
+    (name)
+    (text))
+  (tag
+    (prefix)
     (name)
     (text))
   (tag
@@ -111,6 +117,8 @@ DEBUG thís shoúld wórk with $weird$ symbols
 
 // // This is a different special tag
 
+ FIXME starting with a space works
+
 --------------------------------------------------------------------------------
 
 (source
@@ -141,6 +149,10 @@ DEBUG thís shoúld wórk with $weird$ symbols
     (name)
     (text))
   (tag
+    (name)
+    (text))
+  (tag
+    (prefix)
     (name)
     (text))
   (tag
@@ -190,6 +202,8 @@ HACK(user: not a valid tag because of the missing parentheses
 
 // //(thedadams): This is a different special tag
 
+ HACK(thedadams): starting with a space works
+
 --------------------------------------------------------------------------------
 
 (source
@@ -250,6 +264,11 @@ HACK(user: not a valid tag because of the missing parentheses
     (prefix)
     (name)
     (user)
+    (text))
+  (tag
+    (prefix)
+    (name)
+    (user)
     (text)))
 
 ================================================================================
@@ -287,6 +306,8 @@ FIXME() This is a valid tag even though the user is missing
 // ?(thedadams) And with a prefix
 
 // //(thedadams) This is a different special tag
+
+    HACK(thedadams) starting with a tab works
 
 --------------------------------------------------------------------------------
 
@@ -347,6 +368,11 @@ FIXME() This is a valid tag even though the user is missing
     (prefix)
     (name)
     (user)
+    (text))
+  (tag
+    (prefix)
+    (name)
+    (user)
     (text)))
 
 ================================================================================
@@ -378,6 +404,9 @@ that spans multiple lines
 and continues here.
 Not parsed because of beginning "
 
+ TODO: Starting with a space works
+ and continues here
+
 --------------------------------------------------------------------------------
 
 (source
@@ -407,6 +436,12 @@ Not parsed because of beginning "
     (text)
     (text)
     (text)
+    (text))
+  (tag
+    (prefix)
+    (name)
+    (text)
+    (prefix)
     (text)))
 
 ================================================================================
@@ -428,7 +463,7 @@ and continues...
 
 HACK Single blank line below acts as separator
 
-HACKths doesn't work because of the lack of space
+HACKthis doesn't work because of the lack of space
 even if I continue on the next line
 
 TODO New section
@@ -440,6 +475,9 @@ TODO This is actually a new valid tag now
 that spans multiple lines
 and continues here.
 Not parsed because of beginning "
+
+ TODO: Starting with a space works
+ and continues here
 
 --------------------------------------------------------------------------------
 
@@ -470,6 +508,12 @@ Not parsed because of beginning "
     (text)
     (text)
     (text)
+    (text))
+  (tag
+    (prefix)
+    (name)
+    (text)
+    (prefix)
     (text)))
 
 ================================================================================

@@ -83,20 +83,23 @@ static bool parse_tagname(TSLexer *lexer, bool mark) {
 }
 
 static bool parse_tagprefix(TSLexer *lexer, bool next_is_tag_name) {
+    bool skipped_something = false;
     while (is_space(lexer->lookahead)) {
+        skipped_something = true;
         lexer->advance(lexer, false);
-    }
-
-    if (!is_possible_start_of_tag(lexer->lookahead)) {
-        return false;
     }
 
     while (is_possible_start_of_tag(lexer->lookahead)) {
+        skipped_something = true;
         lexer->advance(lexer, false);
     }
 
     while (is_space(lexer->lookahead)) {
         lexer->advance(lexer, false);
+    }
+
+    if (!skipped_something) {
+        return false;
     }
 
     lexer->mark_end(lexer);
@@ -180,9 +183,8 @@ bool tree_sitter_comment_external_scanner_scan(void *payload, TSLexer *lexer, co
         }
     }
 
-    if (lexer->get_column(lexer) == 0 && valid_symbols[T_TAGPREFIX] && (is_possible_start_of_tag(lexer->lookahead)) ||
-        is_space(lexer->lookahead)) {
-        bool special_tag = is_special_tag(lexer->lookahead);
+    if (lexer->get_column(lexer) == 0 && valid_symbols[T_TAGPREFIX] &&
+        (is_possible_start_of_tag(lexer->lookahead) || is_space(lexer->lookahead))) {
         if (parse_tagprefix(lexer, !valid_symbols[T_TAGBREAK])) {
             return true;
         } else if (valid_symbols[T_TAGTEXT] && parse_tagtext(lexer)) {
