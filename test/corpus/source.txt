@@ -30,8 +30,6 @@ DEBUG: thís shoúld wórk with $weird$ symbols
 
 // ?: And with a prefix
 
-// //: This is a different special tag
-
  TODO: starting with a space works
 
 --------------------------------------------------------------------------------
@@ -77,10 +75,6 @@ DEBUG: thís shoúld wórk with $weird$ symbols
   (tag
     (prefix)
     (name)
-    (text))
-  (tag
-    (prefix)
-    (name)
     (text)))
 
 ================================================================================
@@ -115,8 +109,6 @@ DEBUG thís shoúld wórk with $weird$ symbols
 
 // ? And with a prefix
 
-// // This is a different special tag
-
  FIXME starting with a space works
 
 --------------------------------------------------------------------------------
@@ -149,10 +141,6 @@ DEBUG thís shoúld wórk with $weird$ symbols
     (name)
     (text))
   (tag
-    (name)
-    (text))
-  (tag
-    (prefix)
     (name)
     (text))
   (tag
@@ -199,8 +187,6 @@ HACK(user: not a valid tag because of the missing parentheses
 ?(another): So is this
 
 // ?(thedadams): And with a prefix
-
-// //(thedadams): This is a different special tag
 
  HACK(thedadams): starting with a space works
 
@@ -264,11 +250,6 @@ HACK(user: not a valid tag because of the missing parentheses
     (prefix)
     (name)
     (user)
-    (text))
-  (tag
-    (prefix)
-    (name)
-    (user)
     (text)))
 
 ================================================================================
@@ -304,8 +285,6 @@ FIXME() This is a valid tag even though the user is missing
 ?(another) So is this
 
 // ?(thedadams) And with a prefix
-
-// //(thedadams) This is a different special tag
 
     HACK(thedadams) starting with a tab works
 
@@ -356,11 +335,6 @@ FIXME() This is a valid tag even though the user is missing
     (user)
     (text))
   (tag
-    (name)
-    (user)
-    (text))
-  (tag
-    (prefix)
     (name)
     (user)
     (text))
