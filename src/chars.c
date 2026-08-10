@@ -2,7 +2,10 @@
 
 static bool is_special_tag(int32_t c) {
     const int32_t special_chars[] = {
-        CHAR_EXCLAMATION_STAR, CHAR_EXCLAMATION_MARK, CHAR_QUESTION_MARK, CHAR_HASH, CHAR_FORWARD_SLASH,
+        CHAR_EXCLAMATION_STAR,
+        CHAR_EXCLAMATION_MARK,
+        CHAR_QUESTION_MARK,
+        CHAR_HASH,
     };
     const int length = sizeof(special_chars) / sizeof(int32_t);
     for (int i = 0; i < length; i++) {
